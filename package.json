@@ -1,11 +1,12 @@
 {
-  "name": "with-tailwindcss",
+  "name": "chrishandy.net",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "latest",
@@ -15,6 +16,8 @@
   "devDependencies": {
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.5",
-    "tailwindcss": "^2.2.4"
+    "tailwindcss": "^2.2.4",
+    "eslint": "7.29.0",
+    "eslint-config-next": "11.0.1"
   }
 }
