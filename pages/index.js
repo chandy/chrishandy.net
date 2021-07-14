@@ -11,13 +11,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="flex w-full justify-between p-2 m-1">
-        <Link href="/">
-          <a>
-            chrishandy.net
-          </a>
-        </Link>
-        <div className="flex p-1 justify-between gap-2">
-          <nav>
+        <div className="flex p-1">
+          <Link href="/">
+            <a className="p-2">chrishandy.net</a>
+          </Link>
+        </div>
+        <div className="flex p-1">
           {/* <AiFillGithub/> */}
           <Link href="https://github.com/chandy/chrishandy.net">
             <a className="p-2">Source</a>
@@ -25,7 +24,6 @@ export default function Home() {
             <Link href="https://twitter.com/chrishandy_">
             <a className="bg-black text-white p-2">Follow Me</a>
             </Link>
-          </nav>
         </div>
       </header>
 
