@@ -16,14 +16,14 @@ export default function Home() {
             chrishandy.net
           </a>
         </Link>
-        <div className="flex justify-between">
+        <div className="flex p-1 justify-between gap-2">
           <nav>
           {/* <AiFillGithub/> */}
           <Link href="https://github.com/chandy/chrishandy.net">
-            <a>Source</a>
+            <a className="p-2">Source</a>
           </Link>
             <Link href="https://twitter.com/chrishandy_">
-            <a className="bg-black text-white">Follow Me</a>
+            <a className="bg-black text-white p-2">Follow Me</a>
             </Link>
           </nav>
         </div>
@@ -31,7 +31,7 @@ export default function Home() {
 
       <main>
         <div className="flex justify-center align-middle p-2 m-1">
-        <p>Under construction....</p>
+        <p>Under construction...</p>
         </div>
       </main>
       <footer>
