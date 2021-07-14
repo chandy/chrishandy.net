@@ -12,19 +12,19 @@ export default function Home() {
       </Head>
       <header className="flex w-full justify-between p-2 m-1">
         <Link href="/">
-          <a className="" href="/">
+          <a>
             chrishandy.net
           </a>
         </Link>
         <div className="flex justify-between">
           <nav>
           {/* <AiFillGithub/> */}
-            <a className="src" target="_blank" href="https://github.com/chandy/">
-              Source
-            </a>
-            <a className="bg-black text-white" target="_blank" href="https://twitter.com/chrishandy__">
-              Follow Me
-            </a>
+          <Link href="https://github.com/chandy/chrishandy.net">
+            <a>Source</a>
+          </Link>
+            <Link href="https://twitter.com/chrishandy_">
+            <a className="bg-black text-white">Follow Me</a>
+            </Link>
           </nav>
         </div>
       </header>
