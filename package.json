@@ -6,9 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write ."
+  },
+  "prettier": {
+    "arrowParens": "avoid"
   },
   "dependencies": {
+    "@mdx-js/loader": "^1.5.1",
+    "@mdx-js/react": "^1.6.18",
+    "@next/mdx": "^9.1.1",
     "@heroicons/react": "^1.0.2",
     "next": "latest",
     "react": "^17.0.2",
@@ -20,6 +27,7 @@
     "eslint": "7.29.0",
     "eslint-config-next": "11.0.1",
     "postcss": "^8.3.5",
+    "prettier": "2.3.2",
     "tailwindcss": "^2.2.4"
   }
 }
