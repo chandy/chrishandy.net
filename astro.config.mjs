@@ -14,6 +14,6 @@ export default defineConfig({
   //   mode: "standalone",
   // }),
   integrations: [tailwind(), mdx(), vue(), htmx()],
-  output: "server",
+  output: "hybrid",
   adapter: vercel()
 });
