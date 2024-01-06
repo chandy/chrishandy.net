@@ -13,6 +13,7 @@
     "@astrojs/mdx": "^2.0.3",
     "@astrojs/node": "^7.0.4",
     "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/vercel": "^6.1.3",
     "@astrojs/vue": "^4.0.8",
     "astro": "^4.1.1",
     "astro-htmx": "^1.0.5",
