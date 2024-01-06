@@ -2,11 +2,20 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-const title = "chrishandy.net";
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
 ---
-<html>
-  <head>
-    <!-- Astro uses a JSX-like syntax in its body -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Chris Handy" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
   <body class="m-auto max-w-2xl px-4 py-8">
