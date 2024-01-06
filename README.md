@@ -1,4 +1,4 @@
-# Astro Starter Kit: Basics
+# chrishandy.net site
 
 ```
 npm create astro@latest -- --template basics
