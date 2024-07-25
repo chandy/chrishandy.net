@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return [
+    {params: {post: 'mxdc'}},
+    {params: {post: 'mosel'}},
+    {params: {post: 'iceland'}},
+  ];
+}
+
+const {post} = Astro.params;
+---
+
+<BaseLayout title="post">
+    Looking at post {post}
+</BaseLayout>
