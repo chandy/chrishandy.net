@@ -1,10 +1,11 @@
 ---
 import Counter from "../components/counter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_TITLE } from "../consts";
 
 ---
 
-<BaseLayout title="chrishandy.net">
+<BaseLayout title={SITE_TITLE}>
 about
 <Counter>Hello Counter</Counter>
 </BaseLayout>

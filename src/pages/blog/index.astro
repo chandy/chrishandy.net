@@ -1,0 +1,29 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout title={SITE_TITLE}>
+			<section>
+				<ul>
+					{
+						posts.map((post) => (
+							<li class="text-gray-500">
+								<a href={`/blog/${post.id}/`}>
+									<h4 class="title text-xl text-gray-600">{post.data.title}</h4>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+</BaseLayout>

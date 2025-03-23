@@ -1,14 +1,18 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
-import mdx from "@astrojs/mdx";
-import vue from "@astrojs/vue";
-import htmx from "astro-htmx";
-import alpine from '@astrojs/alpinejs';
-import vercel from "@astrojs/vercel/serverless";
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
+import tailwindcss from "@tailwindcss/vite";
+import react from '@astrojs/react';
+
 
 // https://astro.build/config
 export default defineConfig({
-  output: "hybrid",
+  site: 'https://chrishandy.net',
+  integrations: [mdx(), sitemap(), react()],
   adapter: vercel(),
-  integrations: [tailwind(), mdx(), vue(), htmx(), alpine()]
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
