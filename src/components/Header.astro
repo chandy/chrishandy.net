@@ -2,21 +2,29 @@
 
 ---
 
-<header
-  class="flex flex-col sm:flex-row items-center justify-between mb-5 md:mb-10"
->
-  <h1 class="mb-4 sm:mb-0">
-    <a href="/" class="text-xxl md:text-2xl lg:text-2xl">chrishandy</a>
-  </h1>
-  <nav class="text-xs sm:text-sm md:text-base w-full sm:w-auto">
-    <ul class="flex justify-center sm:justify-end space-x-4 md:space-x-6">
+<header class="flex flex-col sm:flex-row items-center justify-between mb-8 md:mb-12 pb-6 border-b border-slate-700">
+  <div class="mb-4 sm:mb-0 flex items-center space-x-3">
+    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+      <span class="text-white font-mono text-sm font-bold">CH</span>
+    </div>
+    <h1>
+      <a href="/" class="text-2xl md:text-3xl font-mono font-bold text-slate-100 hover:text-blue-400 transition-colors">chrishandy</a>
+    </h1>
+  </div>
+  <nav class="w-full sm:w-auto">
+    <ul class="flex justify-center sm:justify-end space-x-6">
       <li>
-        <a
-          href="/blog"
-          class="text-gray-600 hover:text-gray-900 transition-colors duration-200"
-          >blog</a>
+        <a href="/blog" class="font-mono text-sm text-slate-400 hover:text-blue-400 transition-colors duration-200 flex items-center space-x-1">
+          <span>~/</span>
+          <span>blog</span>
+        </a>
       </li>
-      <!-- <li><a href="/resume" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Resume</a></li> -->
+      <li>
+        <a href="/about" class="font-mono text-sm text-slate-400 hover:text-purple-400 transition-colors duration-200 flex items-center space-x-1">
+          <span>~/</span>
+          <span>about</span>
+        </a>
+      </li>
     </ul>
   </nav>
 </header>

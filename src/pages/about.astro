@@ -1,11 +1,103 @@
 ---
-import Counter from "../components/counter.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SITE_TITLE } from "../consts";
-
 ---
 
-<BaseLayout title={SITE_TITLE}>
-about
-<Counter>Hello Counter</Counter>
+<BaseLayout title="About - chrishandy.net">
+  <div class="space-y-8">
+    <header class="space-y-4">
+      <h1 class="text-3xl font-bold font-mono text-slate-100">&gt; about</h1>
+      <p class="text-slate-400 font-mono text-sm">
+        get to know me
+      </p>
+    </header>
+
+    <section class="space-y-6">
+      <div class="bg-slate-800/30 border border-slate-700 rounded-lg p-6">
+        <h2 class="text-xl font-semibold text-slate-200 mb-4 font-mono">&gt; whoami</h2>
+        <div class="space-y-4 text-slate-300 leading-relaxed">
+          <p>
+            Hey there! I'm Chris Handy, an AI-powered developer who's passionate about transforming how we build software. 
+            I specialize in leveraging AI tools like Claude Code to enhance productivity and code quality.
+          </p>
+          <p>
+            My focus is on helping developers and teams adopt AI-assisted workflows that make coding more efficient, 
+            creative, and enjoyable. As a founding member of AI Circle, I'm connected to a professional community 
+            of leaders, builders, and investors at the AI frontier.
+          </p>
+          <p>
+            I'm currently helping organizations integrate Claude Code into their development processes, 
+            writing about AI in software engineering, and building the future of developer productivity.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-slate-800/30 border border-slate-700 rounded-lg p-6">
+          <h3 class="font-mono text-blue-400 mb-3">&gt; currently</h3>
+          <ul class="space-y-2 text-sm text-slate-300">
+            <li class="flex items-center space-x-2">
+              <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span>Building AI-powered development workflows</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+              <span>Mastering Claude Code integration</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+              <span>Writing about AI in software engineering</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-800/30 border border-slate-700 rounded-lg p-6">
+          <h3 class="font-mono text-purple-400 mb-3">&gt; ai_focus</h3>
+          <ul class="space-y-2 text-sm text-slate-300">
+            <li>🤖 AI-assisted programming</li>
+            <li>⚡ Developer productivity tools</li>
+            <li>🧠 Prompt engineering</li>
+            <li>🔄 Automated code review</li>
+            <li>📈 AI adoption strategies</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-slate-800/30 border border-slate-700 rounded-lg p-6">
+        <h3 class="font-mono text-cyan-400 mb-3">&gt; connect</h3>
+        <p class="text-slate-300 mb-4">
+          I'm always interested in connecting with fellow developers and hearing about interesting projects. 
+          Feel free to reach out!
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a 
+            href="https://www.ai-circle.org/" 
+            target="_blank"
+            class="font-mono text-sm text-green-400 hover:text-green-300 transition-colors"
+          >
+            ai_circle →
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/chrishandy/" 
+            target="_blank"
+            class="font-mono text-sm text-purple-400 hover:text-purple-300 transition-colors"
+          >
+            linkedin →
+          </a>
+          <a 
+            href="https://x.com/chrishandy_" 
+            target="_blank"
+            class="font-mono text-sm text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            twitter →
+          </a>
+          <a 
+            href="/blog" 
+            class="font-mono text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
+          >
+            blog →
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

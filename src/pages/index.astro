@@ -8,15 +8,84 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="chrishandy.net">
-  <h1 class="">Hi I am Chris Handy</h1>
-  <!-- Rendering our food items with the Vue component -->
-  <!-- <Food client:load/> -->
-  <!-- <br/>
-  I also like <span class="text-purple-800 font-bold uppercase">Wine</span>
-  <br/>
-  Here are some projects I am currently interested in -->
-  <div class="grid">
+  <div class="space-y-12">
+    <!-- Hero Section -->
+    <section class="space-y-6">
+      <div class="flex items-center space-x-3">
+        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+        <span class="font-mono text-sm text-slate-400">online</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+        Hi, I'm <span class="text-blue-400">Chris Handy</span>
+      </h1>
+      <p class="text-xl text-slate-300 max-w-2xl leading-relaxed">
+        AI-powered developer focused on building the future of software engineering.
+        I specialize in Claude Code, AI workflows, and helping teams leverage AI for maximum productivity.
+      </p>
+    </section>
 
+    <!-- AI Focus -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-slate-200 font-mono">&gt; ai_expertise</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 hover:border-blue-500 transition-colors">
+          <div class="font-mono text-sm text-blue-400 mb-2">ai_development</div>
+          <div class="text-sm text-slate-300">Claude Code, AI-assisted programming, prompt engineering</div>
+        </div>
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 hover:border-purple-500 transition-colors">
+          <div class="font-mono text-sm text-purple-400 mb-2">ai_workflows</div>
+          <div class="text-sm text-slate-300">Code review automation, intelligent debugging, refactoring</div>
+        </div>
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 hover:border-green-500 transition-colors">
+          <div class="font-mono text-sm text-green-400 mb-2">ai_tools</div>
+          <div class="text-sm text-slate-300">LLM integration, AI APIs, developer productivity</div>
+        </div>
+        <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 hover:border-cyan-500 transition-colors">
+          <div class="font-mono text-sm text-cyan-400 mb-2">ai_community</div>
+          <div class="text-sm text-slate-300">Founding member of AI Circle, professional AI leadership network</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Activity -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-slate-200 font-mono">&gt; recent_activity</h2>
+      <div class="space-y-3">
+        <div class="flex items-center space-x-3 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+          <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+          <span class="font-mono text-sm text-slate-400">2024-08-19</span>
+          <span class="text-slate-300">Building AI-powered development workflows</span>
+        </div>
+        <div class="flex items-center space-x-3 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+          <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+          <span class="font-mono text-sm text-slate-400">ongoing</span>
+          <span class="text-slate-300">Writing about AI in software development</span>
+        </div>
+        <div class="flex items-center space-x-3 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
+          <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+          <span class="font-mono text-sm text-slate-400">current</span>
+          <span class="text-slate-300">Consulting on Claude Code adoption</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold text-slate-200 font-mono">&gt; connect</h2>
+      <div class="flex flex-wrap gap-4">
+        <a href="/blog" class="inline-flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-mono text-sm">
+          <span>📝</span>
+          <span>blog</span>
+        </a>
+        <a href="https://www.linkedin.com/in/chrishandy/" target="_blank" class="inline-flex items-center space-x-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors font-mono text-sm">
+          <span>💼</span>
+          <span>linkedin</span>
+        </a>
+        <a href="https://x.com/chrishandy_" target="_blank" class="inline-flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 rounded-lg transition-colors font-mono text-sm">
+          <span>🐦</span>
+          <span>twitter</span>
+        </a>
+      </div>
+    </section>
   </div>
-
 </BaseLayout>

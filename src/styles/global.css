@@ -1,6 +1,72 @@
 @import "tailwindcss";
 
 @theme {
-    /* --default-font-family: "Inter", "sans-serif";  */
-    --font-sans: 'Inter', 'sans-serif';
+    --font-sans: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    
+    --color-primary: #3b82f6;
+    --color-secondary: #8b5cf6;
+    --color-accent: #06b6d4;
+    --color-bg-primary: #0f172a;
+    --color-bg-secondary: #1e293b;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-border: #334155;
+}
+
+/* Blog content styling */
+.blog-content h1 {
+    @apply text-4xl font-bold text-slate-100 mb-6;
+}
+
+.blog-content h2 {
+    @apply text-2xl font-bold text-slate-200 mb-4 mt-8 pb-2 border-b border-slate-700;
+}
+
+.blog-content h3 {
+    @apply text-xl font-bold text-blue-400 mb-3 mt-6;
+}
+
+.blog-content h4 {
+    @apply text-lg font-bold text-slate-300 mb-2 mt-4;
+}
+
+.blog-content p {
+    @apply text-slate-300 leading-relaxed mb-4 font-medium;
+}
+
+.blog-content a {
+    @apply text-blue-400 hover:text-blue-300 transition-colors font-medium;
+}
+
+.blog-content strong {
+    @apply text-slate-200 font-bold;
+}
+
+.blog-content code {
+    @apply text-green-400 bg-slate-800 px-2 py-1 rounded text-sm;
+}
+
+.blog-content pre {
+    @apply bg-slate-800 border border-slate-700 rounded-lg p-4 overflow-x-auto mb-4;
+}
+
+.blog-content pre code {
+    @apply bg-transparent text-slate-300 p-0;
+}
+
+.blog-content blockquote {
+    @apply border-l-4 border-blue-500 pl-4 italic text-slate-400 my-4 font-medium;
+}
+
+.blog-content ul, .blog-content ol {
+    @apply text-slate-300 mb-4 ml-6 font-medium;
+}
+
+.blog-content li {
+    @apply mb-2;
+}
+
+.blog-content hr {
+    @apply border-slate-700 my-8;
 }
