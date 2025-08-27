@@ -1,37 +1,26 @@
 ---
+import Hr from "./Hr.astro";
+import Socials from "./Socials.astro";
+
+const currentYear = new Date().getFullYear();
+
+export interface Props {
+  noMarginTop?: boolean;
+}
+
+const { noMarginTop = false } = Astro.props;
 ---
 
-<footer class="mt-16 pt-8 border-t border-slate-700">
-    <div class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
-        <div class="flex items-center space-x-2">
-            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span class="font-mono text-sm text-slate-400">
-                © {new Date().getFullYear()} Chris Handy
-            </span>
-        </div>
-        <nav class="flex items-center space-x-4">
-            <a 
-                href="https://x.com/chrishandy_" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-mono text-sm text-slate-400 hover:text-blue-400 transition-colors duration-200 flex items-center space-x-1"
-            >
-                <span>@</span>
-                <span>chrishandy_</span>
-            </a>
-            <div class="w-px h-4 bg-slate-600"></div>
-            <a 
-                href="https://www.linkedin.com/in/chrishandy/" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-mono text-sm text-slate-400 hover:text-purple-400 transition-colors duration-200"
-            >
-                linkedin
-            </a>
-            <div class="w-px h-4 bg-slate-600"></div>
-            <span class="font-mono text-xs text-slate-500">
-                built with astro
-            </span>
-        </nav>
+<footer class:list={["w-full", { "mt-auto": !noMarginTop }]}>
+  <Hr noPadding />
+  <div
+    class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"
+  >
+    <Socials centered />
+    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
+      <span>Copyright &#169; {currentYear}</span>
+      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
+      <span>All rights reserved.</span>
     </div>
+  </div>
 </footer>

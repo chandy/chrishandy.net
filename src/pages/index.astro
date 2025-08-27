@@ -1,96 +1,118 @@
 ---
-// This is Astro's frontmatter
-// here you can write regular TypeScript or JavaScript
-// It will only run on the server and never executes client-side
-// import Food from "../components/food.vue";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Socials from "@/components/Socials.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import Card from "@/components/Card.astro";
+import Hr from "@/components/Hr.astro";
+import getSortedPosts from "@/utils/getSortedPosts";
+import IconRss from "@/assets/icons/IconRss.svg";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import { SITE } from "@/config";
+import { SOCIALS } from "@/constants";
 
+const posts = await getCollection("blog");
+
+const sortedPosts = getSortedPosts(posts);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 ---
 
-<BaseLayout title="chrishandy.net">
-  <div class="space-y-12">
-    <!-- Hero Section -->
-    <section class="space-y-6">
-      <div class="flex items-center space-x-3">
-        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-        <span class="font-mono text-sm text-slate-400">online</span>
-      </div>
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
-        Hi, I'm <span class="text-blue-400">Chris Handy</span>
+<Layout>
+  <Header />
+  <main id="main-content" data-layout="index">
+    <section id="hero" class="pt-8 pb-6">
+      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
+        Chris Handy's Blog
       </h1>
-      <p class="text-xl text-slate-300 max-w-2xl leading-relaxed">
-        AI-powered developer focused on building the future of software engineering.
-        I specialize in Claude Code, AI workflows, and helping teams leverage AI for maximum productivity.
+      <a
+        target="_blank"
+        href="/rss.xml"
+        class="inline-block"
+        aria-label="rss feed"
+        title="RSS Feed"
+      >
+        <IconRss
+          width={20}
+          height={20}
+          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
+        />
+        <span class="sr-only">RSS Feed</span>
+      </a>
+
+      <p>
+        Welcome to my words.
       </p>
+      <!-- <p class="mt-2">
+        Read the blog posts or check
+        <LinkButton
+          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          href="https://github.com/satnaing/astro-paper#readme"
+        >
+          README
+        </LinkButton> for more info.
+      </p> -->
+      {
+        // only display if at least one social link is enabled
+        SOCIALS.length > 0 && (
+          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+            <Socials />
+          </div>
+        )
+      }
     </section>
 
-    <!-- AI Focus -->
-    <section class="space-y-6">
-      <h2 class="text-2xl font-semibold text-slate-200 font-mono">&gt; ai_expertise</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 hover:border-blue-500 transition-colors">
-          <div class="font-mono text-sm text-blue-400 mb-2">ai_development</div>
-          <div class="text-sm text-slate-300">Claude Code, AI-assisted programming, prompt engineering</div>
-        </div>
-        <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 hover:border-purple-500 transition-colors">
-          <div class="font-mono text-sm text-purple-400 mb-2">ai_workflows</div>
-          <div class="text-sm text-slate-300">Code review automation, intelligent debugging, refactoring</div>
-        </div>
-        <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 hover:border-green-500 transition-colors">
-          <div class="font-mono text-sm text-green-400 mb-2">ai_tools</div>
-          <div class="text-sm text-slate-300">LLM integration, AI APIs, developer productivity</div>
-        </div>
-        <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 hover:border-cyan-500 transition-colors">
-          <div class="font-mono text-sm text-cyan-400 mb-2">ai_community</div>
-          <div class="text-sm text-slate-300">Founding member of AI Circle, professional AI leadership network</div>
-        </div>
-      </div>
-    </section>
+    <Hr />
 
-    <!-- Recent Activity -->
-    <section class="space-y-6">
-      <h2 class="text-2xl font-semibold text-slate-200 font-mono">&gt; recent_activity</h2>
-      <div class="space-y-3">
-        <a href="/blog/coding-with-claude" class="flex items-center space-x-3 p-3 bg-gradient-to-r from-slate-800/60 to-slate-800/40 rounded-lg border border-blue-500/30 hover:border-blue-400 hover:from-blue-900/20 hover:to-slate-800/60 transition-all duration-300 group cursor-pointer transform hover:scale-[1.02] hover:shadow-lg hover:shadow-blue-500/10">
-          <div class="w-2 h-2 bg-blue-400 rounded-full group-hover:animate-pulse"></div>
-          <span class="font-mono text-sm text-blue-400/80 group-hover:text-blue-300">2024-08-19</span>
-          <span class="text-slate-300 group-hover:text-blue-200 transition-colors duration-300 flex items-center">
-            Published: "Coding with Claude: A Developer's New Superpower"
-            <svg class="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </span>
-        </a>
-        <div class="flex items-center space-x-3 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
-          <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-          <span class="font-mono text-sm text-slate-400">ongoing</span>
-          <span class="text-slate-300">Writing about AI in software development</span>
-        </div>
-        <div class="flex items-center space-x-3 p-3 bg-slate-800/50 rounded-lg border border-slate-700">
-          <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
-          <span class="font-mono text-sm text-slate-400">current</span>
-          <span class="text-slate-300">Consulting on Claude Code adoption</span>
-        </div>
-      </div>
-    </section>
+    {
+      featuredPosts.length > 0 && (
+        <>
+          <section id="featured" class="pt-12 pb-6">
+            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
+            <ul>
+              {featuredPosts.map(data => (
+                <Card variant="h3" {...data} />
+              ))}
+            </ul>
+          </section>
+          {recentPosts.length > 0 && <Hr />}
+        </>
+      )
+    }
 
-    <!-- Quick Links -->
-    <section class="space-y-6">
-      <h2 class="text-2xl font-semibold text-slate-200 font-mono">&gt; connect</h2>
-      <div class="flex flex-wrap gap-4">
-        <a href="/blog" class="inline-flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-mono text-sm">
-          <span>📝</span>
-          <span>blog</span>
-        </a>
-        <a href="https://www.linkedin.com/in/chrishandy/" target="_blank" class="inline-flex items-center space-x-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors font-mono text-sm">
-          <span>💼</span>
-          <span>linkedin</span>
-        </a>
-        <a href="https://x.com/chrishandy_" target="_blank" class="inline-flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-600 rounded-lg transition-colors font-mono text-sm">
-          <span>🐦</span>
-          <span>twitter</span>
-        </a>
-      </div>
-    </section>
-  </div>
-</BaseLayout>
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
+          <ul>
+            {recentPosts.map(
+              (data, index) =>
+                index < SITE.postPerIndex && <Card variant="h3" {...data} />
+            )}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="my-8 text-center">
+      <LinkButton href="/posts/">
+        All Posts
+        <IconArrowRight class="inline-block rtl:-rotate-180" />
+      </LinkButton>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset?.layout;
+    if (indexLayout) {
+      sessionStorage.setItem("backUrl", "/");
+    }
+  });
+</script>
