@@ -10,9 +10,21 @@ tags:
   - ai
   - agents
   - software
+ogImage: https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1600
 description:
   A concise, practical introduction to AI agents—core loop, architectures, and use cases.
 ---
+
+<figure>
+  <img
+    src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1600"
+    alt="Abstract AI circuit head illustration representing AI agents"
+  />
+  <figcaption class="text-center">
+    Image via <a href="https://www.pexels.com/">Pexels</a>
+  </figcaption>
+  
+</figure>
 
 > TL;DR: An AI agent is a system that observes, plans, acts, and learns to achieve goals autonomously. Agents are moving from demos to dependable software components for workflows, data analysis, and customer support.
 
