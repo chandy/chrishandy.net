@@ -33,6 +33,12 @@ Tips
 - Ask for chunked diffs: “split by concern” or “group by file set”.
 - Keep builds green by pinning “run lints/tests before proposing diffs”.
 
+<figure>
+  <img src="/assets/cursor/background.svg" alt="Cursor Background Mode placeholder" />
+  <figcaption class="text-center">Background mode — task runs while you keep coding</figcaption>
+  
+</figure>
+
 ## Plan mode — clarity before code
 
 Plan mode drafts an execution plan with explicit steps and acceptance criteria before editing files.
@@ -46,6 +52,12 @@ Prompts that work well
 - “Propose a 5–7 step plan; list files to touch and invariants.”
 - “Flag risky steps; keep public API stable; add tests when behavior changes.”
 - “After each step, show the minimal diff and rationale.”
+
+<figure>
+  <img src="/assets/cursor/plan.svg" alt="Cursor Plan Mode placeholder" />
+  <figcaption class="text-center">Plan mode — explicit steps before edits</figcaption>
+  
+</figure>
 
 ## RL-driven reliability — safer edits, tighter loops
 
@@ -61,6 +73,12 @@ How to lean into it
 - Provide compact architectural context (layers, module boundaries, naming conventions).
 - Prefer constraints over examples when scope is broad.
 
+<figure>
+  <img src="/assets/cursor/rl.svg" alt="Cursor RL Improvements placeholder" />
+  <figcaption class="text-center">RL-driven reliability — smaller, safer diffs</figcaption>
+  
+</figure>
+
 ## Web-based agents — answers with context and citations
 
 Web-enabled agents can pull fresh docs, changelogs, and examples into your flow.
@@ -74,6 +92,12 @@ Good use cases
 - “Migrate to library X vY—summarize breaking changes with links, then propose a plan.”
 - “Map our `FooService` methods to upstream docs; highlight gaps and tests to add.”
 - “Scan official guides for performance pitfalls in our stack; propose mitigations.”
+
+<figure>
+  <img src="/assets/cursor/web.svg" alt="Cursor Web Agents placeholder" />
+  <figcaption class="text-center">Web-based agents — grounded answers with citations</figcaption>
+  
+</figure>
 
 ## Recipes
 
