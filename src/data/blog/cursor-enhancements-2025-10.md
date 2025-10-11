@@ -94,15 +94,8 @@ Good use cases
 - “Scan official guides for performance pitfalls in our stack; propose mitigations.”
 
 <figure>
-  <iframe
-    src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7378544825731686400?compact=1"
-    width="100%"
-    height="675"
-    frameborder="0"
-    allowfullscreen=""
-    title="Cursor web agent demo"
-  ></iframe>
-  <figcaption class="text-center">Web-based agents — browser-control demo (via LinkedIn)</figcaption>
+  <img src="/assets/cursor/web-agent.gif" alt="Cursor web agent demo (animated)" />
+  <figcaption class="text-center">Web-based agents — browser-control demo</figcaption>
   
 </figure>
 
