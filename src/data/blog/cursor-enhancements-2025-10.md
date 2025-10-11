@@ -94,8 +94,15 @@ Good use cases
 - “Scan official guides for performance pitfalls in our stack; propose mitigations.”
 
 <figure>
-  <img src="/assets/cursor/web.svg" alt="Cursor Web Agents placeholder" />
-  <figcaption class="text-center">Web-based agents — grounded answers with citations</figcaption>
+  <iframe
+    src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7378544825731686400?compact=1"
+    width="100%"
+    height="675"
+    frameborder="0"
+    allowfullscreen=""
+    title="Cursor web agent demo"
+  ></iframe>
+  <figcaption class="text-center">Web-based agents — browser-control demo (via LinkedIn)</figcaption>
   
 </figure>
 
