@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# generated search index (built by Pagefind in build script)
+public/pagefind/
+
 # generated types
 .astro/
 .vercel/
