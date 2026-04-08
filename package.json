@@ -2,6 +2,9 @@
   "name": "green-giant",
   "type": "module",
   "version": "5.5.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
