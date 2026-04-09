@@ -40,6 +40,7 @@ The blog uses Astro's Content Collections v4 with the new file system loader:
 - **Sorting**: Posts sorted by `modDatetime` (if present) or `pubDatetime`
 
 Key post frontmatter fields:
+
 - `title`, `description`, `pubDatetime` (required)
 - `modDatetime`, `featured`, `draft`, `tags` (optional)
 - `ogImage`, `canonicalURL`, `hideEditPost`, `timezone` (optional)
@@ -54,6 +55,7 @@ Key post frontmatter fields:
 ### Routing & Pages
 
 Astro file-based routing with dynamic routes:
+
 - `/` - Homepage (`src/pages/index.astro`)
 - `/posts/[...page]` - Paginated blog listing
 - `/posts/[...slug]` - Individual blog post pages
@@ -66,6 +68,7 @@ Astro file-based routing with dynamic routes:
 ### Layouts
 
 Four main layouts in `src/layouts/`:
+
 - `Layout.astro` - Base layout with SEO, theme toggle, and meta tags
 - `Main.astro` - Main content wrapper
 - `PostDetails.astro` - Blog post detail layout
@@ -74,6 +77,7 @@ Four main layouts in `src/layouts/`:
 ### Components
 
 Reusable Astro components in `src/components/`:
+
 - `Header.astro` - Site header with navigation
 - `Footer.astro` - Site footer
 - `Card.astro` - Blog post card for listings
@@ -108,6 +112,7 @@ Reusable Astro components in `src/components/`:
 ### Build Process
 
 The build command runs multiple steps:
+
 1. `astro check` - TypeScript type checking
 2. `astro build` - Build static site to `dist/`
 3. `pagefind --site dist` - Generate search index
@@ -116,6 +121,7 @@ The build command runs multiple steps:
 ### Search
 
 Uses Pagefind for static site search:
+
 - Search index auto-generated during build
 - Client-side search via `/search` page
 - No external dependencies or API calls required
@@ -129,6 +135,7 @@ Uses Pagefind for static site search:
 ### Dynamic OG Images
 
 Blog posts can have dynamically generated OG images:
+
 - Configured via `dynamicOgImage: true` in `src/config.ts`
 - Generated using Satori (React-to-SVG) and resvg-js
 - Endpoint at `/og.png.ts` generates images on-the-fly

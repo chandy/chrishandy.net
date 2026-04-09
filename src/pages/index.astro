@@ -33,6 +33,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         class="inline-block"
         aria-label="rss feed"
         title="RSS Feed"
+        onclick="window.posthog?.capture('rss_feed_clicked')"
       >
         <IconRss
           width={20}

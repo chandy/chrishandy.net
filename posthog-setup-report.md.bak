@@ -1,0 +1,31 @@
+# PostHog post-wizard report
+
+The wizard has completed a deep integration of PostHog analytics into chrishandy.net. A reusable `posthog.astro` component is injected into the base `Layout.astro` so every page is automatically instrumented. Ten custom events are tracked across seven files, covering the most meaningful reader actions: reading posts, navigating by tag, searching for content, sharing posts, clicking social links, copying code snippets, navigating between posts, toggling themes, scrolling back to top, and clicking the RSS feed link.
+
+| Event | Description | File |
+|---|---|---|
+| `post_viewed` | Fired when a user opens a blog post. Captures `post_title` and `tags`. | `src/layouts/PostDetails.astro` |
+| `code_copied` | Fired when a user copies a code block. Captures `post_title`. | `src/layouts/PostDetails.astro` |
+| `post_navigation_clicked` | Fired when prev/next post buttons are clicked. Captures `direction` and `destination_title`. | `src/layouts/PostDetails.astro` |
+| `tag_clicked` | Fired when a tag badge is clicked. Captures `tag`. | `src/components/Tag.astro` |
+| `social_link_clicked` | Fired when a social profile link is clicked. Captures `platform` and `url`. | `src/components/Socials.astro` |
+| `search_performed` | Fired when a search query is typed. Captures `query`. | `src/pages/search.astro` |
+| `rss_feed_clicked` | Fired when the RSS feed icon on the homepage is clicked. | `src/pages/index.astro` |
+| `post_shared` | Fired when a share button is clicked. Captures `platform`, `link_title`, and `post_url`. | `src/components/ShareLinks.astro` |
+| `theme_toggled` | Fired when the light/dark mode toggle is clicked. Captures `theme` (the new theme). | `src/components/Header.astro` |
+| `back_to_top_clicked` | Fired when the back-to-top button is clicked. Captures `post_title`. | `src/components/BackToTopButton.astro` |
+
+## Next steps
+
+We've built some insights and a dashboard for you to keep an eye on user behavior, based on the events we just instrumented:
+
+- **Dashboard** — [Analytics basics](https://us.posthog.com/project/219442/dashboard/1446132)
+- **Insight** — [Post Views Over Time](https://us.posthog.com/project/219442/insights/c2oXt6Uh)
+- **Insight** — [Top Posts by Views](https://us.posthog.com/project/219442/insights/HjtTXaI7)
+- **Insight** — [Content Engagement Funnel](https://us.posthog.com/project/219442/insights/uuQT3Yci)
+- **Insight** — [Search & Social Activity](https://us.posthog.com/project/219442/insights/cUBf5fbg)
+- **Insight** — [Tag Clicks by Tag](https://us.posthog.com/project/219442/insights/gUS4INQ9)
+
+### Agent skill
+
+We've left an agent skill folder in your project. You can use this context for further agent development when using Claude Code. This will help ensure the model provides the most up-to-date approaches for integrating PostHog.

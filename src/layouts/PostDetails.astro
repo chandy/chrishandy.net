@@ -271,6 +271,12 @@ const nextPost =
 
       await navigator.clipboard.writeText(text ?? "");
 
+      // Track code copy event
+      window.posthog?.capture('code_copied', {
+        post_title: document.querySelector('h1')?.innerText,
+        post_url: window.location.pathname,
+      });
+
       // visual feedback that task is completed
       button.innerText = "Copied";
 
@@ -285,4 +291,12 @@ const nextPost =
   document.addEventListener("astro:after-swap", () =>
     window.scrollTo({ left: 0, top: 0, behavior: "instant" })
   );
+</script>
+
+<script is:inline define:vars={{ postTitle: title, postTags: tags }}>
+  window.posthog?.capture('post_read', {
+    post_title: postTitle,
+    post_tags: postTags,
+    post_url: window.location.pathname,
+  });
 </script>

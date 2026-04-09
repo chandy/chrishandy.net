@@ -54,6 +54,15 @@ const backUrl = SITE.showBackButton ? `${Astro.url.pathname}` : "/";
           const backUrl = pageFindSearch?.dataset?.backurl;
           sessionStorage.setItem("backUrl", backUrl + "?" + params.toString());
 
+          // Debounce search tracking so we capture settled queries, not every keystroke
+          const phWin = window as Window & { __phSearchTimeout?: ReturnType<typeof setTimeout> };
+          clearTimeout(phWin.__phSearchTimeout);
+          phWin.__phSearchTimeout = setTimeout(() => {
+            if (term.trim()) {
+              window.posthog?.capture("search_performed", { query: term });
+            }
+          }, 500);
+
           return term;
         },
       });

@@ -23,6 +23,8 @@ const { tag, tagName, size = "sm" } = Astro.props;
       "relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline",
       { "text-sm": size === "sm" },
     ]}
+    data-tag-name={tagName}
+    onclick={`window.posthog?.capture('tag_clicked', { tag: '${tagName}', source_url: window.location.pathname })`}
   >
     <IconHash
       class:list={[

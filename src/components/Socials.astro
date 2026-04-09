@@ -9,7 +9,7 @@ export interface Props {
 const { centered = false } = Astro.props;
 ---
 
-<div class:list={["flex-wrap justify-center gap-1", { flex: centered }]}>
+<div class:list={["socials-container flex-wrap justify-center gap-1", { flex: centered }]}>
   {
     SOCIALS.map(social => (
       <LinkButton
@@ -23,3 +23,14 @@ const { centered = false } = Astro.props;
     ))
   }
 </div>
+
+<script is:inline>
+  document.querySelectorAll('.socials-container a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      window.posthog?.capture('social_link_clicked', {
+        platform: link.getAttribute('title'),
+        href: link.getAttribute('href'),
+      });
+    });
+  });
+</script>

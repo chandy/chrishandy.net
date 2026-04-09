@@ -8,11 +8,10 @@ featured: true
 draft: false
 tags:
   - docs
-description:
-  Am I really comitting to a blog?
+description: Am I really comitting to a blog?
 ---
 
-Starting a blog in 2025?  Are you mad Chris?
+Starting a blog in 2025? Are you mad Chris?
 
 <figure>
   <img

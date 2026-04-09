@@ -11,8 +11,7 @@ tags:
   - agents
   - software
 ogImage: https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1600
-description:
-  A concise, practical introduction to AI agents—core loop, architectures, and use cases.
+description: A concise, practical introduction to AI agents—core loop, architectures, and use cases.
 ---
 
 <figure>
@@ -56,25 +55,25 @@ This “perceive → plan → act → learn” loop is the backbone of modern ag
 
 ## The agent loop in practice
 
-1) Sense/state
+1. Sense/state
 
 - Inputs: user request, files, emails, tickets, logs
 - Context: recent steps, calendar, CRM, wiki, prior outputs
 - Memory: short‑term scratchpad; long‑term vector or structured store
 
-2) Plan
+2. Plan
 
 - Decompose the goal into tasks
 - Choose tools and set acceptance criteria per step
 - Decide when to ask for help or escalate
 
-3) Act
+3. Act
 
 - Call tools/APIs; execute code; write files; trigger workflows
 - Validate outputs against the plan
 - Log traces for observability
 
-4) Learn
+4. Learn
 
 - Store useful facts, results, and failures
 - Refine prompts, heuristics, and tool choices
@@ -112,13 +111,12 @@ This “perceive → plan → act → learn” loop is the backbone of modern ag
 
 ## A simple path to your first agent
 
-1) Pick a narrow, high‑value workflow with clear success criteria
-2) List the minimum tools needed (e.g., CRM read, ticket update)
-3) Design prompts with examples and guardrails
-4) Add observability: logs, traces, and per‑step validations
-5) Pilot with a small cohort; expand only after measured wins
+1. Pick a narrow, high‑value workflow with clear success criteria
+2. List the minimum tools needed (e.g., CRM read, ticket update)
+3. Design prompts with examples and guardrails
+4. Add observability: logs, traces, and per‑step validations
+5. Pilot with a small cohort; expand only after measured wins
 
 ## Final thought
 
 AI agents are not magic coworkers—but done right, they are dependable software primitives that turn natural language into action. Start small, wire them to the right tools, measure outcomes, and iterate.
-

@@ -12,8 +12,7 @@ tags:
   - prompts
   - best-practices
 ogImage: https://images.pexels.com/photos/270404/pexels-photo-270404.jpeg?auto=compress&cs=tinysrgb&w=1600
-description:
-  A practical guide to prompt engineering for software developers—patterns, anti-patterns, and real examples.
+description: A practical guide to prompt engineering for software developers—patterns, anti-patterns, and real examples.
 ---
 
 <figure>
@@ -296,6 +295,7 @@ Review this deployment YAML for production readiness:
 ## Measuring prompt quality
 
 Track:
+
 - **Acceptance rate**: How often is the first output usable?
 - **Edit distance**: How much do you change the generated code?
 - **Iteration count**: How many back‑and‑forths to get it right?
@@ -312,6 +312,7 @@ Good prompts have high acceptance, low edits, and few iterations.
 ## When to use (and skip) AI code generation
 
 ### Good fits:
+
 - Boilerplate (CRUD handlers, type definitions, configs)
 - Test scaffolding
 - Data transformations with clear specs
@@ -319,6 +320,7 @@ Good prompts have high acceptance, low edits, and few iterations.
 - Refactoring with well‑defined rules
 
 ### Poor fits:
+
 - Novel algorithms requiring deep domain knowledge
 - Security‑critical logic without expert review
 - Highly stateful or concurrent systems
