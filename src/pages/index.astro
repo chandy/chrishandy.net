@@ -22,11 +22,9 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 <Layout>
   <Header />
   <main id="main-content" data-layout="index">
-    <section id="hero" class="px-6 pt-16 pb-12">
-      <h1 class="text-4xl font-medium tracking-tight sm:text-5xl">
-        Chris Handy's Blog
-      </h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+    <section id="hero" class="px-6 pt-12 pb-10">
+      <h1 class="sr-only">{SITE.title}</h1>
+      <p class="max-w-2xl text-lg leading-relaxed text-muted-foreground">
         Welcome to my words.
       </p>
       {
