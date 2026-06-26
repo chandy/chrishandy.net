@@ -13,7 +13,9 @@
     "astro": "astro",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node --test tests/blog-posts.test.mjs",
+    "test:build": "pnpm run build && node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
