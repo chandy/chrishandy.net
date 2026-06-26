@@ -150,3 +150,10 @@ Blog posts can have dynamically generated OG images:
 - The site uses IANA timezone format (default: `America/New_York`)
 - Static assets go in `public/` directory
 - Custom Shiki transformers support filename display, syntax highlighting, and diffs
+
+## Cursor Cloud specific instructions
+
+- Node 22+ and `pnpm` are preinstalled; dependencies are refreshed automatically on startup. See "Essential Commands" above for lint/build/dev commands.
+- Dev server: `pnpm run dev --host 0.0.0.0` serves on `http://localhost:4321/`. New/edited posts in `src/data/blog/*.md` hot-reload automatically.
+- `pnpm install` prints a warning that build scripts for `esbuild` and `sharp` are ignored. This is expected and does NOT need fixing — `pnpm run build` (which uses `sharp`/`resvg` for OG images) and `pnpm run dev` both succeed regardless. Do not run the interactive `pnpm approve-builds`.
+- `pnpm run lint` currently reports 5 pre-existing errors in `src/constants.ts` (unused `Icon*` imports left from commented-out social/share links). These are unrelated to environment setup; do not "fix" them unless that is the actual task.
