@@ -39,7 +39,7 @@ html[data-theme="dark"] {
     scrollbar-color: var(--color-border) transparent;
   }
   html {
-    @apply overflow-y-scroll scroll-smooth;
+    @apply overflow-y-scroll;
   }
   body {
     @apply flex min-h-svh flex-col bg-background font-sans text-foreground antialiased selection:bg-accent/20 selection:text-foreground;
