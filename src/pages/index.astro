@@ -6,6 +6,7 @@ import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
+import HomeGraphic from "@/components/HomeGraphic.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
@@ -22,29 +23,37 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 <Layout>
   <Header />
   <main id="main-content" data-layout="index">
-    <section id="hero" class="px-6 pt-12 pb-10">
-      <h1 class="sr-only">{SITE.title}</h1>
-      <p class="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-        Welcome to my words.
-      </p>
-      {
-        SOCIALS.length > 0 && (
-          <div class="mt-8 flex items-center gap-4">
-            <Socials />
-            <a
-              target="_blank"
-              href="/rss.xml"
-              class="text-muted-foreground transition-colors hover:text-foreground"
-              aria-label="rss feed"
-              title="RSS Feed"
-              onclick="window.posthog?.capture('rss_feed_clicked')"
-            >
-              <IconRss width={16} height={16} class="stroke-current" />
-              <span class="sr-only">RSS Feed</span>
-            </a>
-          </div>
-        )
-      }
+    <section
+      id="hero"
+      class="grid items-center gap-8 px-6 pt-12 pb-10 sm:grid-cols-[minmax(0,1fr)_minmax(14rem,22rem)]"
+    >
+      <div class="min-w-0">
+        <h1 class="sr-only">{SITE.title}</h1>
+        <p class="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          Welcome to my words.
+        </p>
+        {
+          SOCIALS.length > 0 && (
+            <div class="mt-8 flex items-center gap-4">
+              <Socials />
+              <a
+                target="_blank"
+                href="/rss.xml"
+                class="text-muted-foreground transition-colors hover:text-foreground"
+                aria-label="rss feed"
+                title="RSS Feed"
+                onclick="window.posthog?.capture('rss_feed_clicked')"
+              >
+                <IconRss width={16} height={16} class="stroke-current" />
+                <span class="sr-only">RSS Feed</span>
+              </a>
+            </div>
+          )
+        }
+      </div>
+      <div class="flex justify-start sm:justify-end">
+        <HomeGraphic />
+      </div>
     </section>
 
     {
@@ -54,7 +63,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
             Featured
           </h2>
           <ul>
-            {featuredPosts.map(data => (
+            {featuredPosts.map((data) => (
               <Card variant="h3" {...data} />
             ))}
           </ul>
@@ -71,7 +80,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           <ul>
             {recentPosts.map(
               (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} />
+                index < SITE.postPerIndex && <Card variant="h3" {...data} />,
             )}
           </ul>
         </section>

@@ -1,5 +1,4 @@
 ---
-import { slugifyStr } from "@/utils/slugify";
 import type { CollectionEntry } from "astro:content";
 import { getPath } from "@/utils/getPath";
 import dayjs from "dayjs";
@@ -25,18 +24,22 @@ const {
   body,
 } = Astro.props;
 
-const { title, description, pubDatetime, modDatetime, timezone: postTimezone } =
-  data;
+const {
+  title,
+  description,
+  pubDatetime,
+  modDatetime,
+  timezone: postTimezone,
+} = data;
 
 const isModified = modDatetime && modDatetime > pubDatetime;
 const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
-  postTimezone || SITE.timezone
+  postTimezone || SITE.timezone,
 );
 const date = datetime.format("MMM D, YYYY");
 const readingTime = formatReadingTime(getReadingTime(body ?? ""));
 
 const headerProps = {
-  style: { viewTransitionName: slugifyStr(title) },
   class:
     "font-medium tracking-tight text-foreground transition-colors group-hover:text-accent",
 };
@@ -62,7 +65,9 @@ const headerProps = {
   </a>
   {
     showDescription && description && (
-      <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
+      <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+        {description}
+      </p>
     )
   }
 </li>
