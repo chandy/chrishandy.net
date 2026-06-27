@@ -2,37 +2,67 @@
 import { slugifyStr } from "@/utils/slugify";
 import type { CollectionEntry } from "astro:content";
 import { getPath } from "@/utils/getPath";
-import Datetime from "./Datetime.astro";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { SITE } from "@/config";
+import { formatReadingTime, getReadingTime } from "@/utils/getReadingTime";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export interface Props extends CollectionEntry<"blog"> {
   variant?: "h2" | "h3";
+  showDescription?: boolean;
 }
 
-const { variant = "h2", data, id, filePath } = Astro.props;
+const {
+  variant = "h2",
+  showDescription = false,
+  data,
+  id,
+  filePath,
+  body,
+} = Astro.props;
 
-const { title, description, pubDatetime, modDatetime, timezone } = data;
+const { title, description, pubDatetime, modDatetime, timezone: postTimezone } =
+  data;
+
+const isModified = modDatetime && modDatetime > pubDatetime;
+const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
+  postTimezone || SITE.timezone
+);
+const date = datetime.format("MMM D, YYYY");
+const readingTime = formatReadingTime(getReadingTime(body ?? ""));
 
 const headerProps = {
   style: { viewTransitionName: slugifyStr(title) },
-  class: "text-base font-medium tracking-tight text-foreground transition-colors group-hover:text-foreground/70",
+  class:
+    "font-medium tracking-tight text-foreground transition-colors group-hover:text-accent",
 };
 ---
 
-<li class="border-b border-border py-6 first:pt-0 last:border-b-0">
+<li class="border-b border-border py-4 first:pt-0 last:border-b-0">
   <a
     href={getPath(id, filePath)}
-    class="group block focus-visible:no-underline"
+    class="group flex flex-col gap-1 focus-visible:no-underline sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
   >
+    {
+      variant === "h2" ? (
+        <h2 {...headerProps}>{title}</h2>
+      ) : (
+        <h3 {...headerProps}>{title}</h3>
+      )
+    }
+    <span class="shrink-0 text-xs text-muted-foreground sm:text-sm">
+      <time datetime={datetime.toISOString()}>{date}</time>
+      <span aria-hidden="true"> · </span>
+      {readingTime}
+    </span>
+  </a>
   {
-    variant === "h2" ? (
-      <h2 {...headerProps}>{title}</h2>
-    ) : (
-      <h3 {...headerProps}>{title}</h3>
+    showDescription && description && (
+      <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
     )
   }
-  </a>
-  <div class="mt-2">
-    <Datetime {pubDatetime} {modDatetime} {timezone} />
-  </div>
-  <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
 </li>

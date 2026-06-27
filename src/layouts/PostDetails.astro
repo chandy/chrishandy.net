@@ -7,10 +7,10 @@ import Tag from "@/components/Tag.astro";
 import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
-import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
+import { formatReadingTime, getReadingTime } from "@/utils/getReadingTime";
 import { SITE } from "@/config";
 
 export interface Props {
@@ -34,22 +34,21 @@ const {
 } = post.data;
 
 const { Content } = await render(post);
+const readingTime = formatReadingTime(getReadingTime(post.body ?? ""));
+const primaryTag = tags[0];
 
 let ogImageUrl: string | undefined;
 
-// Determine OG image source
 if (typeof initOgImage === "string") {
-  ogImageUrl = initOgImage; // Remote OG image (absolute URL)
+  ogImageUrl = initOgImage;
 } else if (initOgImage?.src) {
-  ogImageUrl = initOgImage.src; // Local asset
+  ogImageUrl = initOgImage.src;
 }
 
-// Use dynamic OG image if enabled and no remote|local ogImage
 if (!ogImageUrl && SITE.dynamicOgImage) {
   ogImageUrl = `${getPath(post.id, post.filePath)}/index.png`;
 }
 
-// Resolve OG image URL (or fallback to SITE.ogImage / default `og.png`)
 const ogImage = ogImageUrl
   ? new URL(ogImageUrl, Astro.url.origin).href
   : undefined;
@@ -64,8 +63,6 @@ const layoutProps = {
   ogImage,
   scrollSmooth: true,
 };
-
-/* ========== Prev/Next Posts ========== */
 
 const allPosts = posts.map(({ data: { title }, id, filePath }) => ({
   id,
@@ -82,110 +79,150 @@ const nextPost =
 
 <Layout {...layoutProps}>
   <Header />
-  <BackButton />
   <main
     id="main-content"
-    class:list={[
-      "mx-auto w-full max-w-app px-6 pb-16",
-      { "mt-8": !SITE.showBackButton },
-    ]}
+    class="mx-auto w-full max-w-app px-6 pt-10 pb-16"
     data-pagefind-body
   >
-    <h1
-      transition:name={slugifyStr(title)}
-      class="text-3xl font-medium tracking-tight sm:text-4xl"
-    >
-      {title}
-    </h1>
-    <div class="mt-4 flex items-center gap-3">
-      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
-      <span
-        aria-hidden="true"
-        class:list={[
-          "text-muted-foreground max-sm:hidden",
-          { hidden: !SITE.editPost.enabled || hideEditPost },
-        ]}>·</span
+    <div id="post-layout" class="lg:gap-12">
+      <nav
+        id="toc"
+        class="hidden lg:block"
+        aria-label="Table of contents"
       >
-      <EditPost {hideEditPost} {post} class="max-sm:hidden" />
+        <div class="sticky top-24">
+          <p class="mb-3 text-xs font-medium tracking-widest text-muted-foreground uppercase">
+            On this page
+          </p>
+          <ol id="toc-list" class="space-y-2 text-sm text-muted-foreground"></ol>
+        </div>
+      </nav>
+
+      <div class="min-w-0">
+        {
+          primaryTag && (
+            <p class="text-xs font-medium tracking-widest text-muted-foreground uppercase">
+              {primaryTag}
+            </p>
+          )
+        }
+        <h1
+          transition:name={slugifyStr(title)}
+          class="mt-3 font-serif text-[clamp(1.75rem,3vw+1rem,2.5rem)] leading-tight font-medium tracking-tight"
+        >
+          {title}
+        </h1>
+        <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+          <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
+          <span aria-hidden="true">·</span>
+          <span>{readingTime}</span>
+          <span
+            aria-hidden="true"
+            class:list={[
+              { hidden: !SITE.editPost.enabled || hideEditPost },
+            ]}>·</span
+          >
+          <EditPost {hideEditPost} {post} />
+        </div>
+
+        <article
+          id="article"
+          class="app-prose mt-12 prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
+        >
+          <Content />
+        </article>
+
+        <footer class="mt-16 border-t border-border pt-10">
+          <EditPost class="mb-6 sm:hidden" {hideEditPost} {post} />
+
+          {
+            tags.length > 0 && (
+              <ul class="mb-8 flex flex-wrap gap-2">
+                {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+              </ul>
+            )
+          }
+
+          <ShareLinks />
+
+          <div data-pagefind-ignore class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {
+              prevPost && (
+                <a
+                  href={getPath(prevPost.id, prevPost.filePath)}
+                  class="group flex flex-col gap-1 rounded-lg border border-border p-4 transition-colors hover:border-accent/30"
+                >
+                  <span class="text-xs tracking-widest text-muted-foreground uppercase">
+                    Previous
+                  </span>
+                  <span class="text-sm font-medium text-foreground group-hover:text-accent">
+                    {prevPost.title}
+                  </span>
+                </a>
+              )
+            }
+            {
+              nextPost && (
+                <a
+                  href={getPath(nextPost.id, nextPost.filePath)}
+                  class="group flex flex-col gap-1 rounded-lg border border-border p-4 text-end transition-colors hover:border-accent/30 sm:col-start-2"
+                >
+                  <span class="text-xs tracking-widest text-muted-foreground uppercase">
+                    Next
+                  </span>
+                  <span class="text-sm font-medium text-foreground group-hover:text-accent">
+                    {nextPost.title}
+                  </span>
+                </a>
+              )
+            }
+          </div>
+        </footer>
+      </div>
     </div>
-    <article
-      id="article"
-      class="app-prose mx-auto mt-12 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
-    >
-      <Content />
-    </article>
-
-    <hr class="my-12 border-border" />
-
-    <EditPost class="sm:hidden" {hideEditPost} {post} />
-
-    <ul class="mt-4 mb-10 flex flex-wrap gap-2 sm:my-10">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
-    </ul>
 
     <BackToTopButton />
-
-    <ShareLinks />
-
-    <hr class="my-10 border-border" />
-
-    <!-- Previous/Next Post Buttons -->
-    <div data-pagefind-ignore class="grid grid-cols-1 gap-8 sm:grid-cols-2">
-      {
-        prevPost && (
-          <a
-            href={getPath(prevPost.id, prevPost.filePath)}
-            class="group flex w-full flex-col gap-1 rounded-lg border border-border p-4 transition-colors hover:border-foreground/20"
-          >
-            <span class="text-xs text-muted-foreground uppercase">Previous</span>
-            <span class="text-sm font-medium text-foreground group-hover:text-foreground/70">
-              {prevPost.title}
-            </span>
-          </a>
-        )
-      }
-      {
-        nextPost && (
-          <a
-            href={getPath(nextPost.id, nextPost.filePath)}
-            class="group flex w-full flex-col gap-1 rounded-lg border border-border p-4 text-end transition-colors hover:border-foreground/20 sm:col-start-2"
-          >
-            <span class="text-xs text-muted-foreground uppercase">Next</span>
-            <span class="text-sm font-medium text-foreground group-hover:text-foreground/70">
-              {nextPost.title}
-            </span>
-          </a>
-        )
-      }
-    </div>
   </main>
   <Footer />
 </Layout>
 
 <script is:inline data-astro-rerun>
-  /** Create a progress indicator
-   *  at the top */
+  document.documentElement.setAttribute("data-reading-mode", "");
+
+  function initReadingMode() {
+    const header = document.querySelector("header");
+    if (!header) return;
+
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          header.classList.toggle("is-scrolled", window.scrollY > 80);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    onScroll();
+    document.addEventListener("scroll", onScroll, { passive: true });
+  }
+
   function createProgressBar() {
-    // Create the main container div
+    if (document.querySelector(".progress-container")) return;
+
     const progressContainer = document.createElement("div");
     progressContainer.className =
-      "progress-container fixed top-0 z-10 h-px w-full bg-border";
+      "progress-container fixed top-0 z-50 h-px w-full bg-border";
 
-    // Create the progress bar div
     const progressBar = document.createElement("div");
-    progressBar.className = "progress-bar h-px w-0 bg-foreground/30";
+    progressBar.className = "progress-bar h-px w-0 bg-accent/60";
     progressBar.id = "myBar";
 
-    // Append the progress bar to the progress container
     progressContainer.appendChild(progressBar);
-
-    // Append the progress container to the document body or any other desired parent element
     document.body.appendChild(progressContainer);
   }
-  createProgressBar();
 
-  /** Update the progress bar
-   *  when user scrolls */
   function updateScrollProgress() {
     document.addEventListener("scroll", () => {
       const winScroll =
@@ -194,105 +231,131 @@ const nextPost =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
-      if (document) {
-        const myBar = document.getElementById("myBar");
-        if (myBar) {
-          myBar.style.width = scrolled + "%";
-        }
-      }
+      const myBar = document.getElementById("myBar");
+      if (myBar) myBar.style.width = scrolled + "%";
     });
   }
-  updateScrollProgress();
 
-  /** Attaches links to headings in the document,
-   *  allowing sharing of sections easily */
+  function buildToc() {
+    const article = document.querySelector("#article");
+    const toc = document.querySelector("#toc");
+    const tocList = document.querySelector("#toc-list");
+    const layout = document.querySelector("#post-layout");
+    if (!article || !toc || !tocList || !layout) return;
+
+    tocList.innerHTML = "";
+    const headings = Array.from(article.querySelectorAll("h2, h3"));
+
+    if (headings.length < 3) {
+      toc.classList.add("hidden");
+      layout.classList.remove("has-toc");
+      return;
+    }
+
+    toc.classList.remove("hidden");
+    layout.classList.add("has-toc");
+
+    for (const heading of headings) {
+      if (!heading.id) {
+        heading.id =
+          heading.textContent
+            ?.trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, "")
+            .replace(/\s+/g, "-") ?? "";
+      }
+
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = `#${heading.id}`;
+      link.textContent = heading.textContent ?? "";
+      link.className =
+        heading.tagName === "H3"
+          ? "block ps-3 transition-colors hover:text-accent"
+          : "block transition-colors hover:text-accent";
+
+      item.appendChild(link);
+      tocList.appendChild(item);
+    }
+  }
+
   function addHeadingLinks() {
     const headings = Array.from(
-      document.querySelectorAll("h2, h3, h4, h5, h6")
+      document.querySelectorAll("#article h2, #article h3, #article h4")
     );
     for (const heading of headings) {
       heading.classList.add("group");
       const link = document.createElement("a");
       link.className =
-        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
-      link.href = "#" + heading.id;
-
-      const span = document.createElement("span");
-      span.ariaHidden = "true";
-      span.innerText = "#";
-      link.appendChild(span);
+        "heading-link ms-2 font-sans text-sm no-underline opacity-0 transition-opacity group-hover:opacity-60 focus:opacity-60";
+      link.href = `#${heading.id}`;
+      link.innerText = "#";
       heading.appendChild(link);
     }
   }
-  addHeadingLinks();
 
-  /** Attaches copy buttons to code blocks in the document,
-   * allowing users to copy code easily. */
   function attachCopyButtons() {
     const copyButtonLabel = "Copy";
-    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+    const codeBlocks = Array.from(document.querySelectorAll("#article pre"));
 
     for (const codeBlock of codeBlocks) {
-      const wrapper = document.createElement("div");
-      wrapper.style.position = "relative";
-
-      // Check if --file-name-offset custom property exists
       const computedStyle = getComputedStyle(codeBlock);
       const hasFileNameOffset =
         computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
-
-      // Determine the top positioning class
       const topClass = hasFileNameOffset
         ? "top-(--file-name-offset)"
         : "-top-3";
 
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
       const copyButton = document.createElement("button");
-      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded border border-border bg-muted px-2 py-1 font-sans text-xs leading-4 font-medium text-foreground`;
       copyButton.innerHTML = copyButtonLabel;
       codeBlock.setAttribute("tabindex", "0");
       codeBlock.appendChild(copyButton);
 
-      // wrap codebock with relative parent element
       codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
       wrapper.appendChild(codeBlock);
 
       copyButton.addEventListener("click", async () => {
-        await copyCode(codeBlock, copyButton);
+        const code = codeBlock.querySelector("code");
+        await navigator.clipboard.writeText(code?.innerText ?? "");
+        window.posthog?.capture("code_copied", {
+          post_title: document.querySelector("h1")?.innerText,
+          post_url: window.location.pathname,
+        });
+        copyButton.innerText = "Copied";
+        setTimeout(() => {
+          copyButton.innerText = copyButtonLabel;
+        }, 700);
       });
-    }
-
-    async function copyCode(block, button) {
-      const code = block.querySelector("code");
-      const text = code?.innerText;
-
-      await navigator.clipboard.writeText(text ?? "");
-
-      // Track code copy event
-      window.posthog?.capture('code_copied', {
-        post_title: document.querySelector('h1')?.innerText,
-        post_url: window.location.pathname,
-      });
-
-      // visual feedback that task is completed
-      button.innerText = "Copied";
-
-      setTimeout(() => {
-        button.innerText = copyButtonLabel;
-      }, 700);
     }
   }
+
+  createProgressBar();
+  updateScrollProgress();
+  initReadingMode();
+  buildToc();
+  addHeadingLinks();
   attachCopyButtons();
 
-  /* Go to page start after page swap */
-  document.addEventListener("astro:after-swap", () =>
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
-  );
+  document.addEventListener("astro:after-swap", () => {
+    document.documentElement.setAttribute("data-reading-mode", "");
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+  });
 </script>
 
 <script is:inline define:vars={{ postTitle: title, postTags: tags }}>
-  window.posthog?.capture('post_read', {
+  window.posthog?.capture("post_read", {
     post_title: postTitle,
     post_tags: postTags,
     post_url: window.location.pathname,
+  });
+</script>
+
+<script is:inline>
+  document.addEventListener("astro:before-swap", () => {
+    document.documentElement.removeAttribute("data-reading-mode");
   });
 </script>

@@ -8,17 +8,17 @@ html[data-theme="light"] {
   --background: #fafafa;
   --foreground: #171717;
   --muted-foreground: #737373;
-  --accent: #171717;
+  --accent: #4f5bd5;
   --muted: #f5f5f5;
   --border: #e5e5e5;
 }
 
 html[data-theme="dark"] {
-  --background: #0a0a0a;
+  --background: #0c0c0e;
   --foreground: #ededed;
   --muted-foreground: #888888;
-  --accent: #ededed;
-  --muted: #1a1a1a;
+  --accent: #5e6ad2;
+  --muted: #141516;
   --border: #262626;
 }
 
@@ -30,6 +30,7 @@ html[data-theme="dark"] {
   --color-muted: var(--muted);
   --color-border: var(--border);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
 }
 
 @layer base {
@@ -41,11 +42,11 @@ html[data-theme="dark"] {
     @apply overflow-y-scroll scroll-smooth;
   }
   body {
-    @apply flex min-h-svh flex-col bg-background font-sans text-foreground antialiased selection:bg-foreground/15 selection:text-foreground;
+    @apply flex min-h-svh flex-col bg-background font-sans text-foreground antialiased selection:bg-accent/20 selection:text-foreground;
   }
   a,
   button {
-    @apply outline-offset-2 outline-foreground/50 focus-visible:no-underline focus-visible:outline-1;
+    @apply outline-offset-2 outline-accent/50 focus-visible:no-underline focus-visible:outline-1;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -61,8 +62,24 @@ html[data-theme="dark"] {
   @apply max-w-4xl;
 }
 
+@utility max-w-prose {
+  max-width: 65ch;
+}
+
 .active-nav {
-  @apply text-foreground;
+  @apply text-accent;
+}
+
+html[data-reading-mode] header {
+  @apply sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md transition-[border-color,background-color] duration-300;
+}
+
+html[data-reading-mode] header.is-scrolled {
+  @apply border-transparent bg-background/60;
+}
+
+html[data-reading-mode] #post-layout.has-toc {
+  @apply lg:grid lg:grid-cols-[10rem_1fr] xl:grid-cols-[11rem_1fr];
 }
 
 :target {
