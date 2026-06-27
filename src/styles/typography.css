@@ -1,20 +1,23 @@
 @plugin '@tailwindcss/typography';
 
 @layer base {
-  /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
-    @apply prose;
+    @apply prose prose-neutral dark:prose-invert max-w-prose font-serif text-[17px] leading-[1.7];
 
     h1,
     h2,
     h3,
     h4,
     th {
-      @apply mb-3 text-foreground;
+      @apply font-serif font-medium tracking-tight text-foreground;
+    }
+
+    h2 {
+      @apply mt-12 mb-4 text-xl;
     }
 
     h3 {
-      @apply italic;
+      @apply mt-10 mb-3 text-lg;
     }
 
     p,
@@ -22,13 +25,12 @@
     ol,
     ul,
     figcaption,
-    table,
-    code {
-      @apply text-foreground;
+    table {
+      @apply text-foreground/90;
     }
 
     a {
-      @apply break-words text-foreground decoration-dashed underline-offset-4 hover:text-accent focus-visible:no-underline;
+      @apply text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:decoration-accent focus-visible:no-underline;
     }
 
     ul {
@@ -36,7 +38,7 @@
     }
 
     li {
-      @apply marker:text-accent;
+      @apply marker:text-muted-foreground;
     }
 
     hr {
@@ -44,21 +46,21 @@
     }
 
     img {
-      @apply mx-auto border border-border;
+      @apply mx-auto rounded-lg;
     }
 
     figcaption {
-      @apply opacity-75;
+      @apply text-muted-foreground;
     }
 
     table {
       th,
       td {
-        @apply border border-border p-2;
+        @apply border border-border p-3;
       }
 
       th {
-        @apply py-1.5;
+        @apply bg-muted/50 py-2 font-sans text-sm font-medium;
       }
 
       code {
@@ -67,7 +69,7 @@
     }
 
     code {
-      @apply rounded bg-muted/75 p-1 break-words text-foreground before:content-none after:content-none;
+      @apply rounded-md bg-muted px-1.5 py-0.5 font-sans text-[0.9em] break-words text-foreground before:content-none after:content-none;
     }
 
     .astro-code code {
@@ -75,33 +77,30 @@
     }
 
     blockquote {
-      @apply border-s-accent/80 break-words opacity-80;
+      @apply border-s-accent/40 font-normal text-muted-foreground italic;
     }
 
     details {
-      @apply inline-block cursor-pointer text-foreground select-none [&_p]:hidden [&_ul]:!my-0;
+      @apply inline-block cursor-pointer font-sans text-foreground select-none [&_p]:hidden [&_ul]:!my-0;
     }
 
     summary {
-      @apply focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent focus-visible:outline-dashed;
+      @apply focus-visible:no-underline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent/50;
     }
 
     pre {
-      @apply focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
+      @apply rounded-lg border border-border font-sans text-base leading-normal focus-visible:border-transparent focus-visible:outline-1 focus-visible:outline-accent/50;
     }
   }
 
-  /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
-    @apply flex border bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
+    @apply flex rounded-lg border border-border bg-(--shiki-light-bg) font-sans text-(--shiki-light) outline-none [&_span]:text-(--shiki-light);
   }
 
   html[data-theme="dark"] .astro-code {
     @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 
-  /* Styles for Shiki transformers */
-  /* https://shiki.style/packages/transformers */
   .astro-code {
     .line.diff.add {
       @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];

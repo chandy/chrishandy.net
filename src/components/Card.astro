@@ -2,26 +2,50 @@
 import { slugifyStr } from "@/utils/slugify";
 import type { CollectionEntry } from "astro:content";
 import { getPath } from "@/utils/getPath";
-import Datetime from "./Datetime.astro";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import { SITE } from "@/config";
+import { formatReadingTime, getReadingTime } from "@/utils/getReadingTime";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export interface Props extends CollectionEntry<"blog"> {
   variant?: "h2" | "h3";
+  showDescription?: boolean;
 }
 
-const { variant = "h2", data, id, filePath } = Astro.props;
+const {
+  variant = "h2",
+  showDescription = false,
+  data,
+  id,
+  filePath,
+  body,
+} = Astro.props;
 
-const { title, description, pubDatetime, modDatetime, timezone } = data;
+const { title, description, pubDatetime, modDatetime, timezone: postTimezone } =
+  data;
+
+const isModified = modDatetime && modDatetime > pubDatetime;
+const datetime = dayjs(isModified ? modDatetime : pubDatetime).tz(
+  postTimezone || SITE.timezone
+);
+const date = datetime.format("MMM D, YYYY");
+const readingTime = formatReadingTime(getReadingTime(body ?? ""));
 
 const headerProps = {
   style: { viewTransitionName: slugifyStr(title) },
-  class: "text-lg font-medium decoration-dashed hover:underline",
+  class:
+    "font-medium tracking-tight text-foreground transition-colors group-hover:text-accent",
 };
 ---
 
-<li class="my-6">
+<li class="border-b border-border py-4 first:pt-0 last:border-b-0">
   <a
     href={getPath(id, filePath)}
-    class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+    class="group flex flex-col gap-1 focus-visible:no-underline sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
   >
     {
       variant === "h2" ? (
@@ -30,7 +54,15 @@ const headerProps = {
         <h3 {...headerProps}>{title}</h3>
       )
     }
+    <span class="shrink-0 text-xs text-muted-foreground sm:text-sm">
+      <time datetime={datetime.toISOString()}>{date}</time>
+      <span aria-hidden="true"> · </span>
+      {readingTime}
+    </span>
   </a>
-  <Datetime {pubDatetime} {modDatetime} {timezone} />
-  <p>{description}</p>
+  {
+    showDescription && description && (
+      <p class="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
+    )
+  }
 </li>

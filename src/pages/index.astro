@@ -6,7 +6,6 @@ import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
-import Hr from "@/components/Hr.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
@@ -23,71 +22,52 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 <Layout>
   <Header />
   <main id="main-content" data-layout="index">
-    <section id="hero" class="pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Chris Handy's Blog
-      </h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="inline-block"
-        aria-label="rss feed"
-        title="RSS Feed"
-        onclick="window.posthog?.capture('rss_feed_clicked')"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
-
-      <p>
+    <section id="hero" class="px-6 pt-12 pb-10">
+      <h1 class="sr-only">{SITE.title}</h1>
+      <p class="max-w-2xl text-lg leading-relaxed text-muted-foreground">
         Welcome to my words.
       </p>
-      <!-- <p class="mt-2">
-        Read the blog posts or check
-        <LinkButton
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
-      </p> -->
       {
-        // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
-          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+          <div class="mt-8 flex items-center gap-4">
             <Socials />
+            <a
+              target="_blank"
+              href="/rss.xml"
+              class="text-muted-foreground transition-colors hover:text-foreground"
+              aria-label="rss feed"
+              title="RSS Feed"
+              onclick="window.posthog?.capture('rss_feed_clicked')"
+            >
+              <IconRss width={16} height={16} class="stroke-current" />
+              <span class="sr-only">RSS Feed</span>
+            </a>
           </div>
         )
       }
     </section>
 
-    <Hr />
-
     {
       featuredPosts.length > 0 && (
-        <>
-          <section id="featured" class="pt-12 pb-6">
-            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
-            <ul>
-              {featuredPosts.map(data => (
-                <Card variant="h3" {...data} />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
+        <section id="featured" class="px-6 pb-12">
+          <h2 class="mb-2 text-sm font-medium tracking-wide text-muted-foreground uppercase">
+            Featured
+          </h2>
+          <ul>
+            {featuredPosts.map(data => (
+              <Card variant="h3" {...data} />
+            ))}
+          </ul>
+        </section>
       )
     }
 
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
+        <section id="recent-posts" class="px-6 pb-12">
+          <h2 class="mb-2 text-sm font-medium tracking-wide text-muted-foreground uppercase">
+            Recent Posts
+          </h2>
           <ul>
             {recentPosts.map(
               (data, index) =>
@@ -98,10 +78,13 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       )
     }
 
-    <div class="my-8 text-center">
-      <LinkButton href="/posts/">
-        All Posts
-        <IconArrowRight class="inline-block rtl:-rotate-180" />
+    <div class="px-6 pb-16">
+      <LinkButton
+        href="/posts/"
+        class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent"
+      >
+        View all posts
+        <IconArrowRight class="inline-block size-4 rtl:-rotate-180" />
       </LinkButton>
     </div>
   </main>
