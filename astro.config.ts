@@ -1,9 +1,6 @@
 import { defineConfig, envField } from "astro/config";
-import { unified } from "@astrojs/markdown-remark";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
-import remarkToc from "remark-toc";
-import remarkCollapse from "remark-collapse";
 import {
   transformerNotationDiff,
   transformerNotationHighlight,
@@ -27,13 +24,7 @@ export default defineConfig({
   // Preserve Astro 6 whitespace behavior between inline elements
   compressHTML: true,
   markdown: {
-    // Astro 7 defaults to Sätteri; keep unified() for remark plugins
-    processor: unified({
-      remarkPlugins: [
-        remarkToc,
-        [remarkCollapse, { test: "Table of contents" }],
-      ],
-    }),
+    // Astro 7 default: Sätteri (no remark/rehype plugins)
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },

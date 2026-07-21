@@ -23,8 +23,6 @@ Starting a blog in 2025? Are you mad Chris?
   </figcaption>
 </figure>
 
-## Table of contents
-
 ## New year, new me
 
 this is what it feels like
