@@ -16,6 +16,10 @@ export default defineConfig({
     host: true,
     port: 8080,
   },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "viewport",
+  },
   integrations: [
     sitemap({
       filter: (page) => SITE.showArchives || !page.endsWith("/archives"),
@@ -47,6 +51,13 @@ export default defineConfig({
   image: {
     responsiveStyles: true,
     layout: "constrained",
+    domains: ["images.pexels.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+    ],
   },
   env: {
     schema: {

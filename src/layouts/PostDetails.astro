@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import { fade } from "astro:transitions";
 import { render, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
@@ -7,6 +9,7 @@ import Tag from "@/components/Tag.astro";
 import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
+import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
@@ -25,6 +28,7 @@ const {
   author,
   description,
   ogImage: initOgImage,
+  cover,
   canonicalURL,
   pubDatetime,
   modDatetime,
@@ -74,15 +78,33 @@ const currentPostIndex = allPosts.findIndex((a) => a.id === post.id);
 
 const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
 const nextPost =
-  currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null;
+  currentPostIndex !== allPosts.length - 1
+    ? allPosts[currentPostIndex + 1]
+    : null;
+
+const relatedPosts = posts
+  .filter(({ id }) => id !== post.id)
+  .map((candidate) => ({
+    candidate,
+    score: candidate.data.tags.filter((tag) => tags.includes(tag)).length,
+  }))
+  .filter(({ score }) => score > 0)
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 3)
+  .map(({ candidate }) => candidate);
+
+const coverIsRemote = typeof cover === "string";
+const coverAlt = `${title} cover image`;
 ---
 
 <Layout {...layoutProps}>
   <Header />
+  <BackButton />
   <main
     id="main-content"
     class="mx-auto w-full max-w-app px-6 pt-10 pb-16"
     data-pagefind-body
+    transition:animate={fade({ duration: 180 })}
   >
     <div id="post-layout" class="lg:gap-12">
       <nav id="toc" class="hidden lg:block" aria-label="Table of contents">
@@ -106,6 +128,8 @@ const nextPost =
           )
         }
         <h1
+          transition:name={`post-title-${post.id}`}
+          transition:animate={fade({ duration: 180 })}
           class="mt-3 font-serif text-[clamp(1.75rem,3vw+1rem,2.5rem)] leading-tight font-medium tracking-tight"
         >
           {title}
@@ -123,6 +147,56 @@ const nextPost =
           >
           <EditPost {hideEditPost} {post} />
         </div>
+
+        <details
+          id="mobile-toc"
+          class="mt-8 rounded-lg border border-border px-4 py-3 lg:hidden"
+        >
+          <summary
+            class="cursor-pointer list-none text-sm font-medium text-foreground marker:content-none [&::-webkit-details-marker]:hidden"
+          >
+            <span class="flex items-center justify-between gap-3">
+              <span>On this page</span>
+              <span
+                class="text-xs tracking-widest text-muted-foreground uppercase"
+                aria-hidden="true">TOC</span
+              >
+            </span>
+          </summary>
+          <ol
+            id="toc-list-mobile"
+            class="mt-3 space-y-2 border-t border-border pt-3 text-sm text-muted-foreground"
+          >
+          </ol>
+        </details>
+
+        {
+          cover && (
+            <figure class="mt-10">
+              {coverIsRemote ? (
+                <Image
+                  src={cover}
+                  alt={coverAlt}
+                  width={1600}
+                  height={900}
+                  class="mx-auto h-auto w-full rounded-lg"
+                  loading="eager"
+                  decoding="async"
+                />
+              ) : (
+                <Image
+                  src={cover}
+                  alt={coverAlt}
+                  widths={[640, 960, 1280, 1600]}
+                  sizes="(max-width: 768px) 100vw, 65ch"
+                  class="mx-auto h-auto w-full rounded-lg"
+                  loading="eager"
+                  decoding="async"
+                />
+              )}
+            </figure>
+          )
+        }
 
         <article
           id="article"
@@ -145,6 +219,36 @@ const nextPost =
           }
 
           <ShareLinks />
+
+          {
+            relatedPosts.length > 0 && (
+              <section class="mt-10" aria-labelledby="related-posts-heading">
+                <h2
+                  id="related-posts-heading"
+                  class="mb-4 text-xs font-medium tracking-widest text-muted-foreground uppercase"
+                >
+                  Related posts
+                </h2>
+                <ul class="space-y-3">
+                  {relatedPosts.map((related) => (
+                    <li>
+                      <a
+                        href={getPath(related.id, related.filePath)}
+                        class="group block rounded-lg border border-border p-4 transition-colors hover:border-accent/30"
+                      >
+                        <span class="text-sm font-medium text-foreground group-hover:text-accent">
+                          {related.data.title}
+                        </span>
+                        <span class="mt-1 block text-xs text-muted-foreground">
+                          {related.data.description}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )
+          }
 
           <div
             data-pagefind-ignore
@@ -231,14 +335,29 @@ const nextPost =
 
       const progressContainer = document.createElement("div");
       progressContainer.className =
-        "progress-container fixed top-0 z-50 h-px w-full bg-border";
+        "progress-container fixed top-0 z-50 h-1 w-full bg-transparent";
 
       const progressBar = document.createElement("div");
-      progressBar.className = "progress-bar h-px w-0 bg-accent/60";
+      progressBar.className =
+        "progress-bar h-1 w-0 bg-accent transition-[width] duration-150 ease-out motion-reduce:transition-none";
       progressBar.id = "myBar";
 
       progressContainer.appendChild(progressBar);
       document.body.appendChild(progressContainer);
+    }
+
+    function getArticleProgress() {
+      const article = document.getElementById("article");
+      if (!article) return 0;
+
+      const rect = article.getBoundingClientRect();
+      const articleTop = window.scrollY + rect.top;
+      const articleHeight = article.offsetHeight;
+      const start = articleTop;
+      const end = articleTop + articleHeight - window.innerHeight;
+      const range = Math.max(end - start, 1);
+      const scrolled = window.scrollY - start;
+      return Math.min(100, Math.max(0, (scrolled / range) * 100));
     }
 
     function updateScrollProgress() {
@@ -247,14 +366,8 @@ const nextPost =
         if (ticking) return;
 
         window.requestAnimationFrame(() => {
-          const winScroll =
-            document.body.scrollTop || document.documentElement.scrollTop;
-          const height =
-            document.documentElement.scrollHeight -
-            document.documentElement.clientHeight;
-          const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
           const myBar = document.getElementById("myBar");
-          if (myBar) myBar.style.width = scrolled + "%";
+          if (myBar) myBar.style.width = getArticleProgress() + "%";
           ticking = false;
         });
         ticking = true;
@@ -262,49 +375,115 @@ const nextPost =
 
       onScroll();
       document.addEventListener("scroll", onScroll, { passive: true, signal });
+      window.addEventListener("resize", onScroll, { passive: true, signal });
+    }
+
+    function ensureHeadingId(heading) {
+      if (!heading.id) {
+        heading.id =
+          heading.textContent
+            ?.trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, "")
+            .replace(/\s+/g, "-") ?? "";
+      }
+      return heading.id;
+    }
+
+    function createTocLink(heading) {
+      const link = document.createElement("a");
+      link.href = `#${ensureHeadingId(heading)}`;
+      link.textContent = heading.textContent ?? "";
+      link.dataset.tocTarget = heading.id;
+      link.className =
+        heading.tagName === "H3"
+          ? "toc-link block ps-3 transition-colors hover:text-accent"
+          : "toc-link block transition-colors hover:text-accent";
+      return link;
     }
 
     function buildToc() {
       const article = document.querySelector("#article");
       const toc = document.querySelector("#toc");
       const tocList = document.querySelector("#toc-list");
+      const mobileToc = document.querySelector("#mobile-toc");
+      const mobileTocList = document.querySelector("#toc-list-mobile");
       const layout = document.querySelector("#post-layout");
-      if (!article || !toc || !tocList || !layout) return;
+      if (!article || !toc || !tocList || !layout || !mobileToc || !mobileTocList)
+        return;
 
       tocList.innerHTML = "";
+      mobileTocList.innerHTML = "";
       const headings = Array.from(article.querySelectorAll("h2, h3"));
 
       if (headings.length < 3) {
         toc.classList.add("hidden");
+        mobileToc.classList.add("hidden");
         layout.classList.remove("has-toc");
         return;
       }
 
       toc.classList.remove("hidden");
+      mobileToc.classList.remove("hidden");
       layout.classList.add("has-toc");
 
       for (const heading of headings) {
-        if (!heading.id) {
-          heading.id =
-            heading.textContent
-              ?.trim()
-              .toLowerCase()
-              .replace(/[^\w\s-]/g, "")
-              .replace(/\s+/g, "-") ?? "";
-        }
+        const desktopItem = document.createElement("li");
+        desktopItem.appendChild(createTocLink(heading));
+        tocList.appendChild(desktopItem);
 
-        const item = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = `#${heading.id}`;
-        link.textContent = heading.textContent ?? "";
-        link.className =
-          heading.tagName === "H3"
-            ? "block ps-3 transition-colors hover:text-accent"
-            : "block transition-colors hover:text-accent";
-
-        item.appendChild(link);
-        tocList.appendChild(item);
+        const mobileItem = document.createElement("li");
+        mobileItem.appendChild(createTocLink(heading));
+        mobileTocList.appendChild(mobileItem);
       }
+
+      initTocScrollSpy(headings);
+    }
+
+    function setActiveTocLink(id) {
+      const links = document.querySelectorAll(".toc-link");
+      for (const link of links) {
+        const isActive = link.dataset.tocTarget === id;
+        link.classList.toggle("text-accent", isActive);
+        link.classList.toggle("text-foreground", isActive);
+        link.setAttribute("aria-current", isActive ? "location" : "false");
+      }
+    }
+
+    function initTocScrollSpy(headings) {
+      if (!("IntersectionObserver" in window) || headings.length === 0) return;
+
+      const visible = new Map();
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              visible.set(entry.target.id, entry);
+            } else {
+              visible.delete(entry.target.id);
+            }
+          }
+
+          if (visible.size === 0) return;
+
+          const sorted = [...visible.values()].sort(
+            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
+          );
+          const activeId = sorted[0]?.target.id;
+          if (activeId) setActiveTocLink(activeId);
+        },
+        {
+          rootMargin: "-20% 0px -65% 0px",
+          threshold: [0, 1],
+        },
+      );
+
+      for (const heading of headings) {
+        observer.observe(heading);
+      }
+
+      signal.addEventListener("abort", () => observer.disconnect());
     }
 
     function addHeadingLinks() {
@@ -312,6 +491,7 @@ const nextPost =
         document.querySelectorAll("#article h2, #article h3, #article h4"),
       );
       for (const heading of headings) {
+        ensureHeadingId(heading);
         heading.classList.add("group");
         const link = document.createElement("a");
         link.className =

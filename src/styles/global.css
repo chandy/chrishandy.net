@@ -31,6 +31,9 @@ html[data-theme="dark"] {
   --color-border: var(--border);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-mono:
+    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
 }
 
 @layer base {
@@ -84,4 +87,38 @@ html[data-reading-mode] #post-layout.has-toc {
 
 :target {
   scroll-margin-block: 1rem;
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-enter {
+  animation: card-enter 0.45s ease both;
+  animation-delay: calc(var(--card-index, 0) * 45ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.scroll-smooth {
+    scroll-behavior: auto;
+  }
+
+  .card-enter {
+    animation: none;
+  }
+
+  .progress-bar {
+    transition: none !important;
+  }
+
+  html[data-reading-mode] header {
+    transition: none;
+  }
 }
