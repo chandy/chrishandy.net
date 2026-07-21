@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from "@/components/Breadcrumb.astro";
+import { fade } from "astro:transitions";
 import { SITE } from "@/config";
 
 interface StringTitleProp {
@@ -25,17 +26,26 @@ const backUrl = SITE.showBackButton ? Astro.url.pathname : "/";
   data-backUrl={backUrl}
   id="main-content"
   class="mx-auto w-full max-w-app px-6 pb-8"
+  transition:animate={fade({ duration: 180 })}
 >
   {
     "titleTransition" in props ? (
-      <h1 class="text-3xl font-medium tracking-tight sm:text-4xl">
+      <h1
+        class="text-3xl font-medium tracking-tight sm:text-4xl"
+        transition:animate={fade({ duration: 180 })}
+      >
         {props.pageTitle[0]}
         <span transition:name={props.titleTransition}>
           {props.pageTitle[1]}
         </span>
       </h1>
     ) : (
-      <h1 class="text-3xl font-medium tracking-tight sm:text-4xl">{props.pageTitle}</h1>
+      <h1
+        class="text-3xl font-medium tracking-tight sm:text-4xl"
+        transition:animate={fade({ duration: 180 })}
+      >
+        {props.pageTitle}
+      </h1>
     )
   }
   {props.pageDesc && (

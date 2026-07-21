@@ -13,18 +13,9 @@ tags:
   - development
   - automation
 ogImage: https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1600
+cover: https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1600
 description: A practical guide to Cursor Cloud Agents—how they work, when to use them, and how to set up environments that let agents build, test, and ship real software.
 ---
-
-<figure>
-  <img
-    src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=1600"
-    alt="Developer workspace with code on screen representing cloud-based autonomous development"
-  />
-  <figcaption class="text-center">
-    Image via <a href="https://www.pexels.com/">Pexels</a>
-  </figcaption>
-</figure>
 
 > TL;DR: Cursor Cloud Agents are autonomous AI developers that run in isolated cloud VMs. They clone your repo, install dependencies, write code, run tests, interact with the UI, and open merge-ready PRs—with videos and screenshots proving the work. Set up your development environment well, and they work like engineers who never need a laptop.
 

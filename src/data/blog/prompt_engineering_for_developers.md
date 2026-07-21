@@ -12,19 +12,9 @@ tags:
   - prompts
   - best-practices
 ogImage: https://images.pexels.com/photos/270404/pexels-photo-270404.jpeg?auto=compress&cs=tinysrgb&w=1600
+cover: https://images.pexels.com/photos/270404/pexels-photo-270404.jpeg?auto=compress&cs=tinysrgb&w=1600
 description: A practical guide to prompt engineering for software developers—patterns, anti-patterns, and real examples.
 ---
-
-<figure>
-  <img
-    src="https://images.pexels.com/photos/270404/pexels-photo-270404.jpeg?auto=compress&cs=tinysrgb&w=1600"
-    alt="Code on computer screen representing AI-assisted development"
-  />
-  <figcaption class="text-center">
-    Image via <a href="https://www.pexels.com/">Pexels</a>
-  </figcaption>
-
-</figure>
 
 > TL;DR: Good prompts are specific, provide context, and define success criteria. Use structured formats, examples, and constraints to get reliable outputs from AI models. Iteration beats perfection on the first try.
 
