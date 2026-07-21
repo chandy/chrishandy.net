@@ -18,7 +18,7 @@
     "test:build": "pnpm run build && node --test tests/*.test.mjs"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.2",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.2.2",
