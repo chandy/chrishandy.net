@@ -28,8 +28,12 @@ export default defineConfig({
   compressHTML: true,
   markdown: {
     // Astro 7 defaults to Sätteri; keep unified() for remark plugins
-    processor: unified(),
-    remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
+    processor: unified({
+      remarkPlugins: [
+        remarkToc,
+        [remarkCollapse, { test: "Table of contents" }],
+      ],
+    }),
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
