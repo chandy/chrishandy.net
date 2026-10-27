@@ -1,0 +1,32 @@
+{
+  "featureId": "home",
+  "ok": true,
+  "baseUrl": "http://127.0.0.1:4371",
+  "provenAt": "2026-10-27T11:22:23.783Z",
+  "steps": [
+    "home-identity",
+    "nav-posts"
+  ],
+  "artifacts": [
+    {
+      "featureId": "home",
+      "stem": "01-home",
+      "note": "Home loaded with brand and welcome copy",
+      "url": "http://127.0.0.1:4371/",
+      "title": "Chris Handy",
+      "capturedAt": "2026-10-27T11:22:23.557Z",
+      "screenshotPath": ".cursor/skills/verify-chrishandy-net/evidence/home/01-home.png",
+      "ariaPath": ".cursor/skills/verify-chrishandy-net/evidence/home/01-home.aria.txt"
+    },
+    {
+      "featureId": "home",
+      "stem": "02-posts-nav",
+      "note": "Navigated to Posts via header link",
+      "url": "http://127.0.0.1:4371/posts",
+      "title": "Posts | Chris Handy",
+      "capturedAt": "2026-10-27T11:22:23.734Z",
+      "screenshotPath": ".cursor/skills/verify-chrishandy-net/evidence/home/02-posts-nav.png",
+      "ariaPath": ".cursor/skills/verify-chrishandy-net/evidence/home/02-posts-nav.aria.txt"
+    }
+  ]
+}
