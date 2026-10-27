@@ -2,7 +2,7 @@
   "featureId": "search",
   "ok": true,
   "baseUrl": "http://127.0.0.1:4371",
-  "provenAt": "2026-10-27T08:48:05.266Z",
+  "provenAt": "2026-10-27T11:22:14.402Z",
   "steps": [
     "search-open",
     "search-match",
@@ -16,7 +16,7 @@
       "note": "Search page with Pagefind input ready",
       "url": "http://127.0.0.1:4371/search/",
       "title": "Search | Chris Handy",
-      "capturedAt": "2026-10-27T08:48:03.749Z",
+      "capturedAt": "2026-10-27T11:22:12.834Z",
       "screenshotPath": ".cursor/skills/verify-chrishandy-net/evidence/search/01-search-open.png",
       "ariaPath": ".cursor/skills/verify-chrishandy-net/evidence/search/01-search-open.aria.txt"
     },
@@ -26,7 +26,7 @@
       "note": "Query 'agents' returns matching post link(s)",
       "url": "http://127.0.0.1:4371/search/?q=agents",
       "title": "Search | Chris Handy",
-      "capturedAt": "2026-10-27T08:48:04.630Z",
+      "capturedAt": "2026-10-27T11:22:13.736Z",
       "screenshotPath": ".cursor/skills/verify-chrishandy-net/evidence/search/02-search-results.png",
       "ariaPath": ".cursor/skills/verify-chrishandy-net/evidence/search/02-search-results.aria.txt"
     },
@@ -36,7 +36,7 @@
       "note": "Nonsense query shows empty/no-results state",
       "url": "http://127.0.0.1:4371/search/?q=xyzzy-no-such-post-chrishandy",
       "title": "Search | Chris Handy",
-      "capturedAt": "2026-10-27T08:48:05.199Z",
+      "capturedAt": "2026-10-27T11:22:14.305Z",
       "screenshotPath": ".cursor/skills/verify-chrishandy-net/evidence/search/03-search-empty.png",
       "ariaPath": ".cursor/skills/verify-chrishandy-net/evidence/search/03-search-empty.aria.txt"
     }

@@ -1,0 +1,99 @@
+- banner:
+  - link "Skip to content":
+    - /url: "#main-content"
+  - link "Chris Handy":
+    - /url: /
+  - navigation:
+    - list:
+      - listitem:
+        - link "Posts":
+          - /url: /posts
+      - listitem:
+        - link "Tags":
+          - /url: /tags
+      - listitem:
+        - link "About":
+          - /url: /about
+      - listitem:
+        - link "archives":
+          - /url: /archives
+          - img
+          - text: Archives
+      - listitem:
+        - link "search":
+          - /url: /search
+          - img
+          - text: Search
+      - listitem:
+        - button "dark":
+          - img
+          - img
+- main:
+  - heading "Chris Handy" [level=1]
+  - paragraph: Welcome to my words.
+  - link "Chris Handy on GitHub":
+    - /url: https://github.com/chandy
+    - img
+    - text: Chris Handy on GitHub
+  - link "Chris Handy on X":
+    - /url: https://x.com/chrishandy_
+    - img
+    - text: Chris Handy on X
+  - link "Chris Handy on LinkedIn":
+    - /url: https://www.linkedin.com/in/chrishandy/
+    - img
+    - text: Chris Handy on LinkedIn
+  - link "rss feed":
+    - /url: /rss.xml
+    - img
+    - text: RSS Feed
+  - heading "Featured" [level=2]
+  - list:
+    - listitem:
+      - link "Cursor Cloud Agents — autonomous coding that ships while you sleep Jun 26, 2026 6 min read":
+        - /url: /posts/cursor-cloud-agents
+        - heading "Cursor Cloud Agents — autonomous coding that ships while you sleep" [level=3]
+        - time: Jun 26, 2026
+        - text: 6 min read
+      - paragraph: A practical guide to Cursor Cloud Agents—how they work, when to use them, and how to set up environments that let agents build, test, and ship real software.
+    - listitem:
+      - link "Prompt engineering for developers — practical patterns that work Dec 23, 2025 7 min read":
+        - /url: /posts/prompt-engineering-for-developers
+        - heading "Prompt engineering for developers — practical patterns that work" [level=3]
+        - time: Dec 23, 2025
+        - text: 7 min read
+      - paragraph: A practical guide to prompt engineering for software developers—patterns, anti-patterns, and real examples.
+    - listitem:
+      - link "Why start a blog? Aug 26, 2025 1 min read":
+        - /url: /posts/why-start-a-blog
+        - heading "Why start a blog?" [level=3]
+        - time: Aug 26, 2025
+        - text: 1 min read
+      - paragraph: Am I really comitting to a blog?
+  - heading "Recent Posts" [level=2]
+  - list:
+    - listitem:
+      - link "AI agents — what they are and why they matter Sep 23, 2025 3 min read":
+        - /url: /posts/ai-agents
+        - heading "AI agents — what they are and why they matter" [level=3]
+        - time: Sep 23, 2025
+        - text: 3 min read
+      - paragraph: A concise, practical introduction to AI agents—core loop, architectures, and use cases.
+  - link "View all posts":
+    - /url: /posts/
+    - text: View all posts
+    - img
+- contentinfo:
+  - text: © 2026 · All rights reserved
+  - link "Chris Handy on GitHub":
+    - /url: https://github.com/chandy
+    - img
+    - text: Chris Handy on GitHub
+  - link "Chris Handy on X":
+    - /url: https://x.com/chrishandy_
+    - img
+    - text: Chris Handy on X
+  - link "Chris Handy on LinkedIn":
+    - /url: https://www.linkedin.com/in/chrishandy/
+    - img
+    - text: Chris Handy on LinkedIn
