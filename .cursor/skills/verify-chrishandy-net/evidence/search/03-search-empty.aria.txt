@@ -1,0 +1,58 @@
+- banner:
+  - link "Skip to content":
+    - /url: "#main-content"
+  - link "Chris Handy":
+    - /url: /
+  - navigation:
+    - list:
+      - listitem:
+        - link "Posts":
+          - /url: /posts
+      - listitem:
+        - link "Tags":
+          - /url: /tags
+      - listitem:
+        - link "About":
+          - /url: /about
+      - listitem:
+        - link "archives":
+          - /url: /archives
+          - img
+          - text: Archives
+      - listitem:
+        - link "search":
+          - /url: /search
+          - img
+          - text: Search
+      - listitem:
+        - button "dark":
+          - img
+          - img
+- navigation "breadcrumb":
+  - list:
+    - listitem:
+      - link "Home":
+        - /url: /
+    - listitem: search
+- main:
+  - heading "Search" [level=1]
+  - paragraph: Search any article ...
+  - search "Search this site":
+    - textbox "Search": xyzzy-no-such-post-chrishandy
+    - button "Clear"
+    - paragraph: No results for xyzzy-no-such-post-chrishandy
+    - list
+- contentinfo:
+  - text: © 2026 · All rights reserved
+  - link "Chris Handy on GitHub":
+    - /url: https://github.com/chandy
+    - img
+    - text: Chris Handy on GitHub
+  - link "Chris Handy on X":
+    - /url: https://x.com/chrishandy_
+    - img
+    - text: Chris Handy on X
+  - link "Chris Handy on LinkedIn":
+    - /url: https://www.linkedin.com/in/chrishandy/
+    - img
+    - text: Chris Handy on LinkedIn

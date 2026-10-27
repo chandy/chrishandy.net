@@ -1,0 +1,10 @@
+{
+  "featureId": "search",
+  "stem": "03-search-empty",
+  "note": "Nonsense query shows empty/no-results state",
+  "url": "http://127.0.0.1:4371/search/?q=xyzzy-no-such-post-chrishandy",
+  "title": "Search | Chris Handy",
+  "capturedAt": "2026-10-27T08:48:05.199Z",
+  "screenshotPath": ".cursor/skills/verify-chrishandy-net/evidence/search/03-search-empty.png",
+  "ariaPath": ".cursor/skills/verify-chrishandy-net/evidence/search/03-search-empty.aria.txt"
+}
