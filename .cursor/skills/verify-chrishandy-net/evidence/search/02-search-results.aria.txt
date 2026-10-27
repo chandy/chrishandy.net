@@ -1,0 +1,126 @@
+- banner:
+  - link "Skip to content":
+    - /url: "#main-content"
+  - link "Chris Handy":
+    - /url: /
+  - navigation:
+    - list:
+      - listitem:
+        - link "Posts":
+          - /url: /posts
+      - listitem:
+        - link "Tags":
+          - /url: /tags
+      - listitem:
+        - link "About":
+          - /url: /about
+      - listitem:
+        - link "archives":
+          - /url: /archives
+          - img
+          - text: Archives
+      - listitem:
+        - link "search":
+          - /url: /search
+          - img
+          - text: Search
+      - listitem:
+        - button "dark":
+          - img
+          - img
+- navigation "breadcrumb":
+  - list:
+    - listitem:
+      - link "Home":
+        - /url: /
+    - listitem: search
+- main:
+  - heading "Search" [level=1]
+  - paragraph: Search any article ...
+  - search "Search this site":
+    - textbox "Search": agents
+    - button "Clear"
+    - paragraph: 2 results for agents
+    - list:
+      - listitem:
+        - paragraph:
+          - link "AI agents — what they are and why they matter":
+            - /url: /posts/ai-agents/
+        - paragraph:
+          - text: AI
+          - mark: agents
+          - text: — what they are and why they matter Sep 23,
+        - paragraph:
+          - link "⤷ What is an AI agent?":
+            - /url: /posts/ai-agents/#what-is-an-ai-agent
+        - paragraph:
+          - text: an AI
+          - mark: agent?
+          - text: At its core, an AI
+          - mark: agent
+          - text: is a goal‑directed
+        - paragraph:
+          - link "⤷ Why agents now?":
+            - /url: /posts/ai-agents/#why-agents-now
+        - paragraph:
+          - text: Why
+          - mark: agents
+          - text: "now? Model capabilities: LLMs can follow instructions, decompose tasks, and"
+        - paragraph:
+          - link "⤷ Common agent types":
+            - /url: /posts/ai-agents/#common-agent-types
+        - paragraph:
+          - text: Common
+          - mark: agent
+          - text: "types. Reactive assistants: Single‑turn helpers without long‑term memory. Goal‑based planners:"
+      - listitem:
+        - paragraph:
+          - link "Cursor Cloud Agents — autonomous coding that ships while you sleep":
+            - /url: /posts/cursor-cloud-agents/
+        - paragraph:
+          - text: Cursor Cloud
+          - mark: Agents
+          - text: — autonomous coding that ships while you sleep Jun
+        - paragraph:
+          - link "⤷ What are Cursor Cloud Agents?":
+            - /url: /posts/cursor-cloud-agents/#what-are-cursor-cloud-agents
+        - paragraph:
+          - text: Cursor Cloud
+          - mark: Agents?
+          - text: Cursor Cloud
+          - mark: Agents
+          - text: take the same
+          - mark: agent
+          - text: fundamentals you
+        - paragraph:
+          - link "⤷ How they differ from local agents":
+            - /url: /posts/cursor-cloud-agents/#how-they-differ-from-local-agents
+        - paragraph:
+          - text: differ from local
+          - mark: agents.
+          - text: Local
+          - mark: agent
+          - text: (IDE) Cloud
+          - mark: agent
+          - text: Where it runs.
+        - paragraph:
+          - link "⤷ Setting up development environments":
+            - /url: /posts/cursor-cloud-agents/#setting-up-development-environments
+        - paragraph:
+          - text: capable as the environments they run in. An
+          - mark: agent
+          - text: that can write
+- contentinfo:
+  - text: © 2026 · All rights reserved
+  - link "Chris Handy on GitHub":
+    - /url: https://github.com/chandy
+    - img
+    - text: Chris Handy on GitHub
+  - link "Chris Handy on X":
+    - /url: https://x.com/chrishandy_
+    - img
+    - text: Chris Handy on X
+  - link "Chris Handy on LinkedIn":
+    - /url: https://www.linkedin.com/in/chrishandy/
+    - img
+    - text: Chris Handy on LinkedIn

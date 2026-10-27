@@ -1,0 +1,15 @@
+{
+  "name": "verify-chrishandy-net",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "bin": {
+    "verify-site": "./bin/verify-site.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.55.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
