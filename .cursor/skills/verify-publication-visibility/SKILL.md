@@ -99,7 +99,7 @@ When editing this skill or after a large refactor of the model:
 
 ## Sync commit
 
-- **Sync commit:** `(set on first green handoff commit of this skill)`
+- **Sync commit:** `d4b1e94d49aeb809eabe0ad4cf4f3ea916ae187c`
 - **Last confirmed:** model describes the files in the table at that commit.
 
 ## Second nearby target
